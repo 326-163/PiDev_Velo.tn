@@ -1,3 +1,11 @@
+rent_reservation:
+    resource: "@RentBundle/Resources/config/routing/reservation.yml"
+    prefix:   /reservation
+
+rent_location:
+    resource: "@RentBundle/Resources/config/routing/location.yml"
+    prefix:   /location
+
 rent_homepage:
     path:     /
     defaults: { _controller: RentBundle:Default:index }

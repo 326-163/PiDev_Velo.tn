@@ -1,0 +1,24 @@
+reservation_index:
+    path:     /
+    defaults: { _controller: "RentBundle:Reservation:index" }
+    methods:  GET
+
+reservation_show:
+    path:     /{idR}/show
+    defaults: { _controller: "RentBundle:Reservation:show" }
+    methods:  GET
+
+reservation_new:
+    path:     /new
+    defaults: { _controller: "RentBundle:Reservation:new" }
+    methods:  [GET, POST]
+
+reservation_edit:
+    path:     /{idR}/edit
+    defaults: { _controller: "RentBundle:Reservation:edit" }
+    methods:  [GET, POST]
+
+reservation_delete:
+    path:     /{idR}/delete
+    defaults: { _controller: "RentBundle:Reservation:delete" }
+    methods:  DELETE

@@ -42,12 +42,7 @@ class Reservation
      */
     private $datefin;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_L", type="integer", nullable=false)
-     */
-    private $idL;
+    
 
     /**
      * @var integer
@@ -55,7 +50,12 @@ class Reservation
      * @ORM\Column(name="id_U", type="integer", nullable=false)
      */
     private $idU;
-
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="RentBundle\Entity\Location", inversedBy="Reservation")
+     * @ORM\JoinColumn(name="id_L", referencedColumnName="id")
+     */
+    private $idL;
 
 }
 

@@ -57,5 +57,9 @@ class Location
     private $rating = '0';
 
 
+    /**
+     * @ORM\OneToOne(targetEntity="RentBundle\Entity\Reservation",mappedBy="Location")
+     */
+    protected $idR;	
 }
 
