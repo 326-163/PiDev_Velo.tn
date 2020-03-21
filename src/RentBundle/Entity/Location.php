@@ -36,9 +36,9 @@ class Location
     private $lieu;
 
     /**
-     * @var float
+     * @var integer
      *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="prix", type="integer", nullable=false)
      */
     private $prix;
 
@@ -61,5 +61,136 @@ class Location
      * @ORM\OneToOne(targetEntity="RentBundle\Entity\Reservation",mappedBy="Location")
      */
     protected $idR;	
+
+    /**
+     * Get idL
+     *
+     * @return int
+     */
+    public function getIdL()
+    {
+        return $this->idL;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Location
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set lieu
+     *
+     * @param string $lieu
+     *
+     * @return Location
+     */
+    public function setLieu($lieu)
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    /**
+     * Get lieu
+     *
+     * @return string
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param int $prix
+     *
+     * @return Location
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return int
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     *
+     * @return Location
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set rating
+     *
+     * @param int $rating
+     *
+     * @return Location
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return int
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
 }
 

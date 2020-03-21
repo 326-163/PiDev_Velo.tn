@@ -1,24 +1,24 @@
 location_index:
-    path:     /
+    path:     /location
     defaults: { _controller: "RentBundle:Location:index" }
     methods:  GET
 
 location_show:
-    path:     /{idL}/show
+    path:     /{idL}/showRent
     defaults: { _controller: "RentBundle:Location:show" }
     methods:  GET
 
 location_new:
-    path:     /new
+    path:     /newRent
     defaults: { _controller: "RentBundle:Location:new" }
     methods:  [GET, POST]
 
 location_edit:
-    path:     /{idL}/edit
+    path:     /{idL}/editRent
     defaults: { _controller: "RentBundle:Location:edit" }
     methods:  [GET, POST]
 
 location_delete:
-    path:     /{idL}/delete
+    path:     /{idL}/deleteRent
     defaults: { _controller: "RentBundle:Location:delete" }
     methods:  DELETE

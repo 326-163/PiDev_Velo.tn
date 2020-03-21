@@ -8,4 +8,13 @@ rent_location:
 
 rent_homepage:
     path:     /
-    defaults: { _controller: RentBundle:Default:index }
+    defaults: { _controller: RentBundle:location:index }
+
+location_new:
+    path:     /newRent
+    defaults: { _controller: "RentBundle:Location:new" }
+
+location_show:
+    path:     /showRent{idL}
+    defaults: { _controller: "RentBundle:Location:show" }
+
