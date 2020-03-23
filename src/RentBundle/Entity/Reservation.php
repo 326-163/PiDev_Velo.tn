@@ -53,9 +53,9 @@ class Reservation
     
     /**
      * @ORM\ManyToOne(targetEntity="RentBundle\Entity\Location", inversedBy="Reservation")
-     * @ORM\JoinColumn(name="id_L", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
-    private $idL;
+    private $id;
 
 }
 

@@ -6,15 +6,32 @@ rent_location:
     resource: "@RentBundle/Resources/config/routing/location.yml"
     prefix:   /location
 
-rent_homepage:
+homepage:
     path:     /
+    defaults: { _controller: RentBundle:location:home }
+
+rent_homepage:
+    path:     /location
     defaults: { _controller: RentBundle:location:index }
 
 location_new:
     path:     /newRent
-    defaults: { _controller: "RentBundle:Location:new" }
+    defaults: { _controller: RentBundle:Location:new }
 
 location_show:
-    path:     /showRent{idL}
-    defaults: { _controller: "RentBundle:Location:show" }
+    path:     /showRent{id}
+    defaults: { _controller: RentBundle:Location:show }
 
+location_confirmation:
+    path:     /confirme
+    defaults: { _controller: RentBundle:Location:confirme }
+
+location_edit:
+    path:    /editRent{id}
+    defaults: { _controller: RentBundle:Location:edit }
+    methods:  [GET, POST]
+
+location_rech:
+    path:    /rech{id}
+    defaults: { _controller: RentBundle:Location:recherche }
+       

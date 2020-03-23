@@ -4,7 +4,7 @@ location_index:
     methods:  GET
 
 location_show:
-    path:     /{idL}/showRent
+    path:    /showRent/{idL}
     defaults: { _controller: "RentBundle:Location:show" }
     methods:  GET
 
@@ -14,11 +14,11 @@ location_new:
     methods:  [GET, POST]
 
 location_edit:
-    path:     /{idL}/editRent
+    path:    /editRent/{idL}
     defaults: { _controller: "RentBundle:Location:edit" }
     methods:  [GET, POST]
 
 location_delete:
-    path:     /{idL}/deleteRent
+    path:    /deleteRent/{idL}
     defaults: { _controller: "RentBundle:Location:delete" }
     methods:  DELETE

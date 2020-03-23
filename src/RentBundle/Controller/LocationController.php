@@ -18,20 +18,31 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class LocationController extends Controller
 {
     /**
-     * Lists all location entities.
+     * Home.
      *
      */
+    public function homeAction()
+    {
+        return $this->render('RentBundle:Default:index.html.twig');
+    }
+
+
     public function indexAction()
     {
+       // $user =$this->getUser();
+    //if($user){
         $em = $this->getDoctrine()->getManager();
 
         $locations = $em->getRepository('RentBundle:Location')->findAll();
-
-        return $this->render('location/index.html.twig', array(
+    /*}else{
+        $this->redirectToRoute('fos_user_security_login');
+      }*/
+        return $this->render('RentBundle:location:location.html.twig', array(
             'locations' => $locations,
         ));
+        var_dump($locations); die();
     }
-
+    
     /**
      * Creates a new location entity.
      *
@@ -57,15 +68,19 @@ class LocationController extends Controller
     }*/
     public function newAction(Request $request)
     {
+            // $user =$this->getUser();
+    //if($user){
       $em=$this->getDoctrine()->getEntityManager();
       $location = new Location();
-
+/*}else{
+        $this->redirectToRoute('fos_user_security_login');
+      }*/
       $form=$this->createFormBuilder($location)
       ->add('titre',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->add('lieu',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->add('prix',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->add('photo',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-      ->add('rating',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+      //->add('rating',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->add('Submit',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->getForm();
 
@@ -76,14 +91,14 @@ class LocationController extends Controller
    $location->setLieu($form['lieu']->getData());
    $location->setPrix($form['prix']->getData());
    $location->setPhoto($form['photo']->getData());
-   $location->setRating($form['rating']->getData() );
+   //$location->setRating($form['rating']->getData() );
    
    $em->persist ($location);
    $em->flush();
 
    $this->addFlash('success','your rent has been successfuly persisted !');
 
-   return $this->redirect ($this->generateUrl('location_show'));
+   return $this->redirect ($this->generateUrl('location_confirmation'));
  }
 
 return $this->render('RentBundle:location:new.html.twig', array (
@@ -95,11 +110,11 @@ return $this->render('RentBundle:location:new.html.twig', array (
      * Finds and displays a location entity.
      *
      */
-    public function showAction($idL)
+    public function showAction(Location $location)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $locationtion = $em->getRepository('RentBundle:Location')->find($id);
-        $categories = $em->getRepository('RentBundle:Location', array('idL' => $location->getIdl() ) )->findAll();
+        $location = $em->getRepository('RentBundle:Location')->find($id);
+        $locations = $em->getRepository('RentBundle:Location', array('id' => $location->getId() ) )->findAll();
         return $this->render('RentBundle:location:show.html.twig', array(
             'location' => $location,
         ));
@@ -118,7 +133,7 @@ return $this->render('RentBundle:location:new.html.twig', array (
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('location_edit', array('idL' => $location->getIdL()));
+            return $this->redirectToRoute('location_edit', array('id' => $location->getId()));
         }
 
         return $this->render('location/edit.html.twig', array(
@@ -161,4 +176,26 @@ return $this->render('RentBundle:location:new.html.twig', array (
             ->getForm()
         ;
     }
+     /**
+     * confirmation.
+     *
+     */
+    public function confirmeAction()
+    {
+        return $this->render('RentBundle:location:confirmation.html.twig');
+    }
+
+   /* public function rechercheAction(Request $request)
+    {
+         $em=$this->getDoctrine()->getManager();
+         $find=$em->getRepository(Location::class)->findAll();
+         if ($request->isMethod('POST')){
+             $type=$request->get('titre');
+             $find=$em->getRepository(Location::class)->findBy(array('titre'=>$titre));
+         }
+        return $this->render("RentBundle:location:show.html.twig", array(
+            "titre" => $titre
+        ));
+    }*/
+ 
 }
