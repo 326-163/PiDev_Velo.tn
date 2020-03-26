@@ -40,7 +40,7 @@ class LocationController extends Controller
         return $this->render('RentBundle:location:location.html.twig', array(
             'locations' => $locations,
         ));
-        var_dump($locations); die();
+        //var_dump($locations); die()
     }
     
     /**
@@ -58,7 +58,7 @@ class LocationController extends Controller
             $em->persist($location);
             $em->flush();
 
-            return $this->redirectToRoute('location_show', array('idL' => $location->getIdl()));
+            return $this->redirectToRoute('location_show', array('id' => $location->getId()));
         }
 
         return $this->render('RentBundle:location:new.html.twig', array(
@@ -110,16 +110,16 @@ return $this->render('RentBundle:location:new.html.twig', array (
      * Finds and displays a location entity.
      *
      */
-    public function showAction(Location $location)
+    public function showAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
         $location = $em->getRepository('RentBundle:Location')->find($id);
-        $locations = $em->getRepository('RentBundle:Location', array('id' => $location->getId() ) )->findAll();
+        $locations = $em->getRepository('RentBundle:Location')->findAll();
         return $this->render('RentBundle:location:show.html.twig', array(
             'location' => $location,
         ));
     }
-   
+
     /**
      * Displays a form to edit an existing location entity.
      *
@@ -136,7 +136,7 @@ return $this->render('RentBundle:location:new.html.twig', array (
             return $this->redirectToRoute('location_edit', array('id' => $location->getId()));
         }
 
-        return $this->render('location/edit.html.twig', array(
+        return $this->render('RentBundle:location:edit.html.twig', array(
             'location' => $location,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -171,7 +171,7 @@ return $this->render('RentBundle:location:new.html.twig', array (
     private function createDeleteForm(Location $location)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('location_delete', array('idL' => $location->getIdl())))
+            ->setAction($this->generateUrl('location_delete', array('id' => $location->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
@@ -196,6 +196,25 @@ return $this->render('RentBundle:location:new.html.twig', array (
         return $this->render("RentBundle:location:show.html.twig", array(
             "titre" => $titre
         ));
-    }*/
+    }
+    
+      public function searchbynameAction($name){
+        $club = $this->getDoctrine()->getRepository(Club::class);
+        $re =$club->myfindName($name);
+        dump($re);
+        die();
+        return $this->render('@Club/Club/search.html.twig',
+            ['club'=>$re]);
+
+    }
+    public function getelementAction($id){
+        $club = $this->getDoctrine()->getRepository(Club::class);
+        $re =$club->findonebyname($id);
+        //dump($re);
+        return $this->render('@Club/Club/search.html.twig',
+            ['club'=>$re]);
+
+    }
+    */
  
 }

@@ -4,7 +4,7 @@ reservation_index:
     methods:  GET
 
 reservation_show:
-    path:     /{idR}/showReserv
+    path:    /showReserv/{id}
     defaults: { _controller: "RentBundle:Reservation:show" }
     methods:  GET
 
@@ -14,11 +14,11 @@ reservation_new:
     methods:  [GET, POST]
 
 reservation_edit:
-    path:     /{idR}/editReserv
+    path:     /editReserv/{id}
     defaults: { _controller: "RentBundle:Reservation:edit" }
     methods:  [GET, POST]
 
 reservation_delete:
-    path:     /{idR}/deleteReserv
+    path:     /deleteReserv/{id}
     defaults: { _controller: "RentBundle:Reservation:delete" }
     methods:  DELETE

@@ -3,6 +3,7 @@
 namespace RentBundle\Controller;
 
 use RentBundle\Entity\Reservation;
+use RentBundle\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -42,7 +43,7 @@ class ReservationController extends Controller
             $em->persist($reservation);
             $em->flush();
 
-            return $this->redirectToRoute('reservation_show', array('idR' => $reservation->getIdr()));
+            return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
         }
 
         return $this->render('reservation/new.html.twig', array(
@@ -78,7 +79,7 @@ class ReservationController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('reservation_edit', array('idR' => $reservation->getIdr()));
+            return $this->redirectToRoute('reservation_edit', array('id' => $reservation->getId()));
         }
 
         return $this->render('reservation/edit.html.twig', array(
@@ -116,7 +117,7 @@ class ReservationController extends Controller
     private function createDeleteForm(Reservation $reservation)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('reservation_delete', array('idR' => $reservation->getIdr())))
+            ->setAction($this->generateUrl('reservation_delete', array('id' => $reservation->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

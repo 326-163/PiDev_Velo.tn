@@ -3,6 +3,7 @@
 namespace RentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Location
@@ -21,9 +22,15 @@ class Location
      */
     private $id;
 
+
     /**
      * @var string
-     *
+     * @Assert\Length(
+     *     min=5,
+     *     max=50,
+     *     minMessage="Le titre doit contenir au moins 5 carcatères ",
+     *     maxMessage="Le titre doit contenir au plus 20 carcatères"
+     * )
      * @ORM\Column(name="titre", type="string", length=20, nullable=false)
      */
     private $titre;
@@ -56,11 +63,12 @@ class Location
      */
     private $rating = '0';
 
-
     /**
-     * @ORM\OneToOne(targetEntity="RentBundle\Entity\Reservation",mappedBy="Location")
+     * @ORM\OneToMany(targetEntity="Reservation",mappedBy="Location")
+     * @ORM\JoinColumn(name="id_Reservation"
+     * ,referencedColumnName="id")
      */
-    protected $idR;	
+    protected $id_Reservation;
 
     /**
      * Get id
@@ -191,6 +199,8 @@ class Location
     {
         return $this->rating;
     }
+    
+   
 
 }
 
