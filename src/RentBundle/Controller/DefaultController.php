@@ -10,4 +10,12 @@ class DefaultController extends Controller
     {
         return $this->render('RentBundle:Default:index.html.twig');
     }
+
+    public function dashboardAction(Request $request)
+    {
+
+        return $this->render('AppBundle:dashebord-base.html.twig',array (
+
+        ));
+    }
 }

@@ -1,16 +1,23 @@
-{% extends 'base.html.twig' %}
+{% extends "::base.html.twig" %}
+
+{% block title %}<div class="text-center" ><h1> Ajout location : locataire</h1> <br/>{% endblock %}
+
+<br>
 
 {% block body %}
-    <h1>Location creation</h1>
+<div class="container">
+        {{ form_start(form) }}
 
-    {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('location_index') }}">Back to the list</a>
-        </li>
-    </ul>
+        {{ form_end(form) }}
+        </div>
+        </div>
+        <!-- /.container-fluid -->
+
+       
+
+    </div>
+  
+ 
 {% endblock %}

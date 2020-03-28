@@ -1,4 +1,4 @@
-location_index:
+location_homepage:
     path:     /location
     defaults: { _controller: "RentBundle:Location:index" }
     methods:  GET

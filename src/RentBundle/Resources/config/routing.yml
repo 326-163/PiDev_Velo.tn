@@ -7,7 +7,7 @@ rent_location:
     prefix:   /location
 
 homepage:
-    path:     /
+    path:     /rent
     defaults: { _controller: RentBundle:Location:home }
 
 location_homepage:
@@ -30,11 +30,38 @@ location_edit:
     path:    /editRent{id}
     defaults: { _controller: RentBundle:Location:edit }
   
+location_delete:
+    path:    /deleteRent/{id}
+    defaults: { _controller: "RentBundle:Location:delete" }
+
+
 location_rech:
     path:    /rech{id}
     defaults: { _controller: RentBundle:Location:recherche }
 
+reservation_index:
+    path:     /reservation
+    defaults: { _controller: "RentBundle:Reservation:index" }
+   
+reservation_show:
+    path:    /showReserv/{id}
+    defaults: { _controller: "RentBundle:Reservation:show" }
+  
+
 reservation_new:
     path:     /newReserv
     defaults: { _controller: "RentBundle:Reservation:new" }
-    methods:  [GET, POST]       
+   
+
+reservation_edit:
+    path:     /editReserv/{id}
+    defaults: { _controller: "RentBundle:Reservation:edit" }
+  
+
+reservation_delete:
+    path:     /deleteReserv/{id}
+    defaults: { _controller: "RentBundle:Reservation:delete" }
+  
+reservation_notif:  
+    path:     /notif/{id}
+    defaults: { _controller: "RentBundle:Reservation:notif" }

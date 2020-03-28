@@ -135,6 +135,10 @@ return $this->render('RentBundle:location:new.html.twig', array (
 
             return $this->redirectToRoute('location_edit', array('id' => $location->getId()));
         }
+ $em->persist ($location);
+   $em->flush();
+
+   $this->addFlash('success','your rent has been successfuly updated !');
 
         return $this->render('RentBundle:location:edit.html.twig', array(
             'location' => $location,
@@ -147,9 +151,9 @@ return $this->render('RentBundle:location:new.html.twig', array (
      * Deletes a location entity.
      *
      */
-    public function deleteAction(Request $request, Location $location)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($location);
+      /*  $form = $this->createDeleteForm($location);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -157,10 +161,17 @@ return $this->render('RentBundle:location:new.html.twig', array (
             $em->remove($location);
             $em->flush();
         }
+        return $this->redirectToRoute('location_homepage');*/
 
-        return $this->redirectToRoute('location_index');
+        $em=$this->getDoctrine()->getEntityManager();
+        $location = $em->getRepository('RentBundle:Location')->find($id);
+       
+        $em->remove($location);
+        $em->flush();
+        return $this->redirect ($this->generateUrl('location_homepage'));
     }
-
+   
+   
     /**
      * Creates a form to delete a location entity.
      *

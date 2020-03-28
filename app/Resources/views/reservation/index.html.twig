@@ -1,45 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Reservations list</h1>
 
-    <table>
+ {% block title %}  <div class="text-center" ><h1> Liste des reservations: locataire/admin </h1> <br/> {% endblock %}
+<br>
+
+    <table class="table_striped">
         <thead>
-            <tr>
-                <th>Idr</th>
-                <th>Titre</th>
-                <th>Datedeb</th>
-                <th>Datefin</th>
-                <th>Idu</th>
-                <th>Actions</th>
+            <tr>         
+                <th>Date debut</th> <br>
+                <th>Date fin</th>          
             </tr>
         </thead>
         <tbody>
         {% for reservation in reservations %}
             <tr>
-                <td><a href="{{ path('reservation_show', { 'idR': reservation.idR }) }}">{{ reservation.idR }}</a></td>
-                <td>{{ reservation.titre }}</td>
-                <td>{% if reservation.datedeb %}{{ reservation.datedeb|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if reservation.datefin %}{{ reservation.datefin|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ reservation.idU }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('reservation_show', { 'idR': reservation.idR }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('reservation_edit', { 'idR': reservation.idR }) }}">edit</a>
-                        </li>
-                    </ul>
+                <td>{% if reservation.dateDeb %}{{ reservation.dateDeb|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if reservation.dateFin %}{{ reservation.dateFin|date('Y-m-d') }}{% endif %}</td>           
+                <td>                                   
+                    <a href="{{ path('reservation_notif', { 'id': reservation.id }) }}" class="btn btn-success btn-sm"> Accepter </a>
+                    <a href="{{ path('location_delete', { 'id': reservation.id }) }}" class="btn btn-danger btn-sm"> Refuser </a>                    
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('reservation_new') }}">Create a new reservation</a>
-        </li>
-    </ul>
 {% endblock %}

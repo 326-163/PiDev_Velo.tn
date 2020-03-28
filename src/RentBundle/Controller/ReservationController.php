@@ -6,7 +6,8 @@ use RentBundle\Entity\Reservation;
 use RentBundle\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 /**
  * Reservation controller.
  *
@@ -19,21 +20,27 @@ class ReservationController extends Controller
      */
     public function indexAction()
     {
+        // $user =$this->getUser();
+    //if($user){
         $em = $this->getDoctrine()->getManager();
-
-        $reservations = $em->getRepository('RentBundle:Reservation')->findAll();
-
+        $reservations = $em->getRepository('RentBundle:Reservation')->findAll();  
+    /*}else{
+        $this->redirectToRoute('fos_user_security_login');
+      }*/
         return $this->render('reservation/index.html.twig', array(
             'reservations' => $reservations,
         ));
+          var_dump($locations); die();
     }
-
+      
     /**
      * Creates a new reservation entity.
      *
      */
     public function newAction(Request $request)
     {
+         /* $user =$this->getUser();
+    if($user){
         $reservation = new Reservation();
         $form = $this->createForm('RentBundle\Form\ReservationType', $reservation);
         $form->handleRequest($request);
@@ -42,29 +49,62 @@ class ReservationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
-
             return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
         }
 
         return $this->render('reservation/new.html.twig', array(
             'reservation' => $reservation,
             'form' => $form->createView(),
-        ));
-    }
+        ));*/
 
+
+         // $user =$this->getUser();
+    //if($user){
+        $em=$this->getDoctrine()->getEntityManager();
+        $reservation = new Reservation();
+  /*}else{
+          $this->redirectToRoute('fos_user_security_login');
+        }*/
+        $form=$this->createFormBuilder($reservation)
+        ->add('dateDeb',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+        ->add('dateFin',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+        ->add('Submit',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+        ->getForm();
+  
+   $form->handleRequest($request);
+  
+   if ($form->isSubmitted() && $form->isValid() ) {
+     $location->setDateDeb($form['dateDeb']->getData());
+     $location->setDateFin($form['dateFin']->getData());
+      
+     $em->persist ($reservation);
+     $em->flush();
+  
+     $this->addFlash('success','reservation ajoutée avec succees  !');
+  
+     return $this->redirect ($this->generateUrl('reservation_show'));
+   }
+  
+  return $this->render('RentBundle:reservation:show.html.twig', array (
+    'form'=>$form->createView()
+  )) ; 
+    }
+   
+    
     /**
      * Finds and displays a reservation entity.
      *
      */
-    public function showAction(Reservation $reservation)
+    public function showAction( $id)
     {
-        $deleteForm = $this->createDeleteForm($reservation);
-
-        return $this->render('reservation/show.html.twig', array(
+      
+        $em = $this->getDoctrine()->getEntityManager();
+        $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
+        $reservations = $em->getRepository('RentBundle:Reservation')->findAll();
+        return $this->render('RentBundle:reservation:show.html.twig', array(
             'reservation' => $reservation,
-            'delete_form' => $deleteForm->createView(),
         ));
-    }
+}
 
     /**
      * Displays a form to edit an existing reservation entity.
@@ -72,13 +112,12 @@ class ReservationController extends Controller
      */
     public function editAction(Request $request, Reservation $reservation)
     {
-        $deleteForm = $this->createDeleteForm($reservation);
+       $deleteForm = $this->createDeleteForm($reservation);
         $editForm = $this->createForm('RentBundle\Form\ReservationType', $reservation);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('reservation_edit', array('id' => $reservation->getId()));
         }
 
@@ -122,4 +161,10 @@ class ReservationController extends Controller
             ->getForm()
         ;
     }
+
+    public function  notifAction(Request $request, Reservation $reservation)
+    {
+
+    }
+   
 }

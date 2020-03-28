@@ -1,18 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Reservation</h1>
+    <div class="text-center" ><h1> Affichage reservation : client</h1> <br/>
+<br>
 
-    <table>
+    <table class="table_striped">
         <tbody>
-            <tr>
-                <th>Idr</th>
-                <td>{{ reservation.idR }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ reservation.titre }}</td>
-            </tr>
             <tr>
                 <th>Datedeb</th>
                 <td>{% if reservation.datedeb %}{{ reservation.datedeb|date('Y-m-d') }}{% endif %}</td>
@@ -21,24 +14,10 @@
                 <th>Datefin</th>
                 <td>{% if reservation.datefin %}{{ reservation.datefin|date('Y-m-d') }}{% endif %}</td>
             </tr>
-            <tr>
-                <th>Idu</th>
-                <td>{{ reservation.idU }}</td>
-            </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('reservation_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('reservation_edit', { 'idR': reservation.idR }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <td>                  
+            <a href="{{ path('reservation_edit', { 'id': reservation.id }) }}" class="btn btn-warning btn-sm"> Modifier </a>
+            <a href="{{ path('reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger btn-sm"> Supprimer </a>                    
+        </td>
 {% endblock %}
