@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="text-center" ><h1> Affichage reservation : client</h1> <br/>
-<br>
+{% block title %} velo.tn {% endblock %} 
+<!-- Page Content -->
+  
+    
+          <div class="text-center" ><h1> Affichage reservation: client </h1> <br/> </div> 
 
+          <br>   <br> 
     <table class="table_striped">
         <tbody>
             <tr>
@@ -14,60 +18,14 @@
                 <th>Datefin</th>
                 <td>{% if reservation.datefin %}{{ reservation.datefin|date('Y-m-d') }}{% endif %}</td>
             </tr>
+          
         </tbody>
     </table>
+   
         <td>                  
-            <a href="{{ path('reservation_edit', { 'id': reservation.id }) }}" class="btn btn-warning btn-sm"> Modifier </a>
-            <a href="{{ path('reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger btn-sm"> Supprimer </a>                    
+            <a href="{{ path('reservation_edit', { 'id': reservation.id }) }}" class="btn btn-warning "> Modifier </a>
+            <a href="{{ path('reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger "> Supprimer </a>                    
         </td>
-{% endblock %}
-
-
-
-
-
-
-
-    <div class="container">
-    <h1 class="center-align">{{ joueur.nom }} {{ joueur.prenom }}</h1>
-<div class="row">
-    <div class="col s7">
-        <table>
-            <tbody>
-            <tr>
-                <th class="right-align">Date naissance</th>
-                <td class="right-align">{% if joueur.dateNaissance %}{{ joueur.dateNaissance|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th class="right-align">CIN</th>
-                <td class="right-align">{{ joueur.cin }}</td>
-            </tr>
-            <tr>
-                <th class="right-align">Natinalité</th>
-                <td class="right-align">{{ joueur.nationalite }}</td>
-            </tr>
-            <tr>
-                <th class="right-align">Adresse</th>
-                <td class="right-align">{{ joueur.adresse }}</td>
-            </tr>
-         
-        </table>
-    </div>
-</div>
-
-    <ul>
-        <li>
-            <div class="center-align"><a class="waves-effect light btn" href="{{ path('entraineur_fiche_evaluate', { 'id': joueur.id }) }}" class="center-align">Evaluer</a> </div>
-
-        </li>
-        <li> <br/>
-            <div class="center-align">   <a class="waves-effect light btn red"  href="{{ path('admin_joueurs_index') }}">Liste des joueurs</a> </div>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-         <br/>   <div class="center-align">    <a class="waves-effect waves-light btn" >      <input type="submit" value="Supprimer"> </a> </div>
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-</div>
+         {% endif %}
+         <br>       <br>   <br>   <br>   <br>    <br>   <br> 
 {% endblock %}

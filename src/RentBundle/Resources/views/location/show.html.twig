@@ -1,32 +1,39 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
 
 <!-- Page Content -->
     <div class="container">
-      <div class="row">
-          {% block title %}<div class="text-center" ><h1> Affichage location: locataire/client </h1> <br/>{% endblock %}
+  
+          {% block title %} Velo.tn {% endblock %}
+          <div class="text-center" ><h1> Affichage location: locataire/client </h1> <br/> </div>
             <br>
-          <div class="list-group">      
+           
               <a href="{{ path('location_show',{'id':location.id}) }}" </a>
-          </div>
-        </div> 
+        
             <img class="card-img-top img-fluid" src="{{ asset(location.photo) }}" alt="" style="width:12.5em">
-            <div class="card-body">
+          <div class="card-body">
               <h3 class="card-title">{{ location.titre }}</h3>
               <h4>{{ location.prix }}DT</h4>
               <h4>{{ location.rating }}</h4>
               <br><br>
-                  <div>
-                  <!--client--> 
-                     <a href="{{ path('reservation_new') }}" class="btn btn-primary">Reserver</a>
-                     <!--locataire--> 
-                      <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a> 
-                    </div>
+
+            <div>
+              <TR>
+                <td>     <!--client--> 
+                  <a href="{{ path('reservation_new') }}" class="btn btn-primary btn-sm">Reserver</a>
+                </td>
+                <td>  <!--locataire-->                    
+                  <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a> 
+                </td>
+              </TR>
+            </div>
           </div>
           <!-- /.card -->
 
       </div>
     </div>
     <!-- /.container -->
+      <br>   <br>   <br> 
 {% endblock %}

@@ -43,9 +43,9 @@ class Location
     private $lieu;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @ORM\Column(name="prix", type="integer", nullable=false)
+     * @ORM\Column(name="Prix", type="float")
      */
     private $prix;
 
@@ -59,16 +59,15 @@ class Location
     /**
      * @var integer
      *
-     * @ORM\Column(name="rating", type="integer", nullable=true)
+     * @ORM\Column(name="rating", type="integer", nullable=false)
      */
     private $rating = '0';
 
+
     /**
-     * @ORM\OneToMany(targetEntity="Reservation",mappedBy="Location")
-     * @ORM\JoinColumn(name="id_Reservation"
-     * ,referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="RentBundle\Entity\Reservation",mappedBy="Location")
      */
-    protected $id_Reservation;
+    protected $Reservation;
 
     /**
      * Get id

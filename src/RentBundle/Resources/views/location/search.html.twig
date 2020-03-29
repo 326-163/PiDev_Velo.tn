@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+ {% block title %} Velo.tn {% endblock %}
+{% block body %}
+{% for location in locations %}
+    <table border="2">
+        <tr>
+            <td>
+                Titre: {{ location.id }}
+                ID: {{ location.titre }}<br>               
+                Lieu: {{ location.lieu }}<br>
+                Prix: {{ location.prix }}<br>
+                Photo:{{ location.photo }}
+            </td>
+            <td>
+                <a href="{{url('deleteP',{'id': res.id })}}"> <button>Reserver</button></a> <br>
+            </td>
+        </tr>
+    </table>
+{% endfor %}
+{% endblock %}

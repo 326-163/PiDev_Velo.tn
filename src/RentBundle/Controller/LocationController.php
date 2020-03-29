@@ -119,7 +119,7 @@ return $this->render('RentBundle:location:new.html.twig', array (
             'location' => $location,
         ));
     }
-
+  
     /**
      * Displays a form to edit an existing location entity.
      *
@@ -226,6 +226,27 @@ return $this->render('RentBundle:location:new.html.twig', array (
             ['club'=>$re]);
 
     }
+
+     
+    public function SendEmailAction(){
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Formalab')
+        ->setFrom('nahawand.laajili@gmail.com')
+        ->setTo('nahawand.laajili@gmail.com')
+        ->setBody('test from nahawand');
+        $this->get('mailer')
+            ->send($message);
+        return $this->render('send.html.twig');
+     }
+ 
+     
+     public function countaction ()
+     {
+       // yay! Use this to see if the user is logged in
+ if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+   throw $this->createAccessDeniedException();
+ }
+ }
     */
  
 }

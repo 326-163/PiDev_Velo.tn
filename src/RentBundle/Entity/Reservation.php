@@ -30,7 +30,7 @@ class Reservation
      * @Assert\Date
      * @Assert\GreaterThanOrEqual("today")
      */
-    private $dateDeb;
+    protected $dateDeb;
 
     /**
      * @var \DateTime
@@ -41,16 +41,14 @@ class Reservation
      *     propertyPath="dateDebut", message="La date du fin doit
      *     être supérieure à la date début")
      */
-    private $dateFin;
-
-    
+    protected $dateFin;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Location")
-     * @ORM\JoinColumn(name="id_Location"
-     * ,referencedColumnName="id")
+     *  @ORM\ManyToOne(targetEntity="RentBundle\Entity\Location",inversedBy="Reservation")
+     * @ORM\JoinColumn(name="Id_location",referencedColumnName="id")
      */
-    private $id_Location;
+    protected $id_L; 
+
 
        /**
      * Get id

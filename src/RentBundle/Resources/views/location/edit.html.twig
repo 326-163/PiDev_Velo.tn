@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   {% block title %}<div class="text-center" ><h1> mise a jour location : Locataire </h1> <br/>{% endblock %}
-
+{% block title %} velo.tn {% endblock %} 
+   
+<div class="text-center" ><h1> mise a jour location : Locataire </h1> <br/>
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />

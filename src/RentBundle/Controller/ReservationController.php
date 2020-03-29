@@ -39,30 +39,11 @@ class ReservationController extends Controller
      */
     public function newAction(Request $request)
     {
-         /* $user =$this->getUser();
-    if($user){
-        $reservation = new Reservation();
-        $form = $this->createForm('RentBundle\Form\ReservationType', $reservation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($reservation);
-            $em->flush();
-            return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
-        }
-
-        return $this->render('reservation/new.html.twig', array(
-            'reservation' => $reservation,
-            'form' => $form->createView(),
-        ));*/
-
-
          // $user =$this->getUser();
-    //if($user){
+        //if($user){
         $em=$this->getDoctrine()->getEntityManager();
         $reservation = new Reservation();
-  /*}else{
+        /*}else{
           $this->redirectToRoute('fos_user_security_login');
         }*/
         $form=$this->createFormBuilder($reservation)
@@ -74,8 +55,8 @@ class ReservationController extends Controller
    $form->handleRequest($request);
   
    if ($form->isSubmitted() && $form->isValid() ) {
-     $location->setDateDeb($form['dateDeb']->getData());
-     $location->setDateFin($form['dateFin']->getData());
+     $reservation->setDateDeb($form['dateDeb']->getData());
+     $reservation->setDateFin($form['dateFin']->getData());
       
      $em->persist ($reservation);
      $em->flush();
@@ -85,9 +66,11 @@ class ReservationController extends Controller
      return $this->redirect ($this->generateUrl('reservation_show'));
    }
   
-  return $this->render('RentBundle:reservation:show.html.twig', array (
+  return $this->render('RentBundle:reservation:new.html.twig', array (
     'form'=>$form->createView()
   )) ; 
+
+ 
     }
    
     
@@ -98,14 +81,21 @@ class ReservationController extends Controller
     public function showAction( $id)
     {
       
-        $em = $this->getDoctrine()->getEntityManager();
+      /*  $em = $this->getDoctrine()->getEntityManager();
         $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
         $reservations = $em->getRepository('RentBundle:Reservation')->findAll();
         return $this->render('RentBundle:reservation:show.html.twig', array(
             'reservation' => $reservation,
-        ));
-}
+        ));*/
 
+      $em = $this->getDoctrine()->getEntityManager();
+      $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
+      $locations = $em->getRepository('RentBundle:Location')->findAll();
+      return $this->render('RentBundle:reservation:show.html.twig',array(
+        'reservation' => $reservation,
+        'locations' => $locations,
+      ));
+    }
     /**
      * Displays a form to edit an existing reservation entity.
      *

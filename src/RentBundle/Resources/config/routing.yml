@@ -44,7 +44,7 @@ reservation_index:
     defaults: { _controller: "RentBundle:Reservation:index" }
    
 reservation_show:
-    path:    /showReserv/{id}
+    path:    /showReserv{id}
     defaults: { _controller: "RentBundle:Reservation:show" }
   
 
@@ -54,7 +54,7 @@ reservation_new:
    
 
 reservation_edit:
-    path:     /editReserv/{id}
+    path:     /editReserv{id}
     defaults: { _controller: "RentBundle:Reservation:edit" }
   
 
