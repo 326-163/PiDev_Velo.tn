@@ -124,28 +124,56 @@ return $this->render('RentBundle:location:new.html.twig', array (
      * Displays a form to edit an existing location entity.
      *
      */
-    public function editAction(Request $request, Location $location)
+    public function editAction(Request $request, $id)
     {
-        $deleteForm = $this->createDeleteForm($location);
-        $editForm = $this->createForm('RentBundle\Form\LocationType', $location);
-        $editForm->handleRequest($request);
+   /* $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
+    $form = $this->createForm('RentBundle\Form\LocationType', $location);
+    $form->handleRequest($request);
+    if ($form->isSubmitted()) {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($location);
+        $em->flush();
+        $this->addFlash('success','your rent has been successfuly updated !');
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        return $this->redirect ($this->generateUrl('location_show'));
+    }*/
+    
 
-            return $this->redirectToRoute('location_edit', array('id' => $location->getId()));
-        }
- $em->persist ($location);
-   $em->flush();
 
-   $this->addFlash('success','your rent has been successfuly updated !');
+        $em=$this->getDoctrine()->getEntityManager();
+      $location = $em->getRepository('RentBundle:Location')->find($id);
 
-        return $this->render('RentBundle:location:edit.html.twig', array(
-            'location' => $location,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+      $form=$this->createFormBuilder($location)
+      ->add('titre',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+      ->add('lieu',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+      ->add('prix',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+      ->add('photo',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+      //->add('rating',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+      ->add('Enregistrer',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+      ->getForm();
+
+ $form->handleRequest($request);
+
+ if ($form->isSubmitted () ) {
+        $location->setTitre($form['titre']->getData());
+        $location->setLieu($form['lieu']->getData());
+        $location->setPrix($form['prix']->getData());
+        $location->setPhoto($form['photo']->getData());
+        //$location->setRating($form['rating']->getData() );
+        
+        $em->persist ($location);
+        $em->flush();
+
+   $this->addFlash('success','your rent has been successfuly persisted !');
+
+   return $this->redirect ($this->generateUrl('location_confirmation'));
+ }
+
+return $this->render('RentBundle:location:edit.html.twig', array (
+  'form'=>$form->createView()
+)) ; 
     }
+    
 
     /**
      * Deletes a location entity.

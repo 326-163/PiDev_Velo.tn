@@ -44,8 +44,11 @@ class Location
 
     /**
      * @var float
-     *
      * @ORM\Column(name="Prix", type="float")
+     * @Assert\NotBlank
+     * @Assert\GreaterThan(value=0,
+     * message="la prix doit etre superieur à 0"
+     * )
      */
     private $prix;
 

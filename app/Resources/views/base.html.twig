@@ -28,7 +28,7 @@
     {% endblock %}
   </head>
 
-  {% block body %}
+ 
   <body>
     <!--::header part start::-->
     <header class="main_menu home_menu">
@@ -89,7 +89,7 @@
                                        Event
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> 
+                                        <a class="dropdown-item" href="login.html.twig"> 
                                             login
                                             
                                         </a>
@@ -112,7 +112,7 @@
                                     </div>
                                 </li>
                                    <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('rent_homepage') }}">Location</a> 
+                                    <a class="nav-link" href="{{ path('location_homepage') }}">Location</a> 
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html.twig">Contact</a>
@@ -148,8 +148,8 @@
         </div>
     </header>
     <!-- Header part end-->
-      {% endblock %}
- 
+    
+    {% block body %}{% endblock %}
          <!--::footer_part start::-->
     <footer class="footer_part">
         <div class="container">

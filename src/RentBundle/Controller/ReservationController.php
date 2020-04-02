@@ -49,7 +49,7 @@ class ReservationController extends Controller
         $form=$this->createFormBuilder($reservation)
         ->add('dateDeb',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
         ->add('dateFin',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-        ->add('Submit',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+        ->add('Enregistrer',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
         ->getForm();
   
    $form->handleRequest($request);
@@ -69,8 +69,6 @@ class ReservationController extends Controller
   return $this->render('RentBundle:reservation:new.html.twig', array (
     'form'=>$form->createView()
   )) ; 
-
- 
     }
    
     
@@ -80,14 +78,6 @@ class ReservationController extends Controller
      */
     public function showAction( $id)
     {
-      
-      /*  $em = $this->getDoctrine()->getEntityManager();
-        $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
-        $reservations = $em->getRepository('RentBundle:Reservation')->findAll();
-        return $this->render('RentBundle:reservation:show.html.twig', array(
-            'reservation' => $reservation,
-        ));*/
-
       $em = $this->getDoctrine()->getEntityManager();
       $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
       $locations = $em->getRepository('RentBundle:Location')->findAll();

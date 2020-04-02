@@ -10,6 +10,10 @@ homepage:
     path:     /rent
     defaults: { _controller: RentBundle:Location:home }
 
+admin_homepage:  
+    path:     /admin
+    defaults: { _controller: RentBundle:Admin:dash }
+
 location_homepage:
     path:     /location
     defaults: { _controller: RentBundle:Location:index }
