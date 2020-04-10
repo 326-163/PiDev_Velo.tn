@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 /**
  * Location controller.
@@ -20,27 +21,22 @@ class LocationController extends Controller
     /**
      * Home.
      *
-     */
-    public function homeAction()
-    {
-        return $this->render('RentBundle:Default:index.html.twig');
-    }
-
+    */
 
     public function indexAction()
     {
-       // $user =$this->getUser();
-    //if($user){
+      $user =$this->getUser();
+      //if($user){
         $em = $this->getDoctrine()->getManager();
-
         $locations = $em->getRepository('RentBundle:Location')->findAll();
-    /*}else{
-        $this->redirectToRoute('fos_user_security_login');
-      }*/
+    //}else{
+      //  $this->redirectToRoute('fos_user_security_login');
+ //}
         return $this->render('RentBundle:location:location.html.twig', array(
             'locations' => $locations,
         ));
-        //var_dump($locations); die()
+        var_dump($locations); 
+        die();
     }
     
     /**
@@ -81,6 +77,7 @@ class LocationController extends Controller
       ->add('prix',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->add('photo',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       //->add('rating',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+      ->add('dateCreation',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->add('Submit',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->getForm();
 
@@ -91,12 +88,12 @@ class LocationController extends Controller
    $location->setLieu($form['lieu']->getData());
    $location->setPrix($form['prix']->getData());
    $location->setPhoto($form['photo']->getData());
-   //$location->setRating($form['rating']->getData() );
-   
+   //$location->setRating($form['rating']->getData());
+   $location->setDateCreation($form['dateCreation']->getData());
    $em->persist ($location);
    $em->flush();
 
-   $this->addFlash('success','your rent has been successfuly persisted !');
+   //$this->addFlash('success','your rent has been successfuly persisted !');
 
    return $this->redirect ($this->generateUrl('location_confirmation'));
  }
@@ -149,6 +146,7 @@ return $this->render('RentBundle:location:new.html.twig', array (
       ->add('prix',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->add('photo',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       //->add('rating',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+      ->add('dateCreation',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->add('Enregistrer',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->getForm();
 
@@ -160,7 +158,7 @@ return $this->render('RentBundle:location:new.html.twig', array (
         $location->setPrix($form['prix']->getData());
         $location->setPhoto($form['photo']->getData());
         //$location->setRating($form['rating']->getData() );
-        
+        $location->setDateCreation($form['dateCreation']->getData());
         $em->persist ($location);
         $em->flush();
 

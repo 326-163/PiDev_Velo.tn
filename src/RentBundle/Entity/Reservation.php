@@ -38,8 +38,8 @@ class Reservation
      * @ORM\Column(name="dateFin", type="date")
      * @Assert\Date
      * @Assert\GreaterThanOrEqual(
-     *     propertyPath="dateDebut", message="La date du fin doit
-     *     être supérieure à la date début")
+     *  propertyPath="dateDebut", message="La date du fin doit
+     *  être supérieure à la date début")
      */
     protected $dateFin;
 
@@ -50,7 +50,7 @@ class Reservation
     protected $id_L; 
 
 
-       /**
+    /**
      * Get id
      *
      * @return int
@@ -66,7 +66,7 @@ class Reservation
      *
      * @param DateTime $dateDeb
      *
-     * @return Location
+     * @return Reservation
      */
     public function setDateDeb($dateDeb)
     {
@@ -84,14 +84,13 @@ class Reservation
     {
         return $this->dateDeb;
     }
-    
-
-     /**
+   
+    /**
      * Set dateFin
      *
      * @param DateTime $dateFin
      *
-     * @return Location
+     * @return Reservation
      */
     public function setDateFin($dateFin)
     {
@@ -109,7 +108,6 @@ class Reservation
     {
         return $this->dateFin;
     }
-    
 
     /**
      * @var integer

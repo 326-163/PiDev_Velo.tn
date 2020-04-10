@@ -8,11 +8,11 @@ rent_location:
 
 homepage:
     path:     /rent
-    defaults: { _controller: RentBundle:Location:home }
+    defaults: { _controller: RentBundle:Default:home }
 
 admin_homepage:  
     path:     /admin
-    defaults: { _controller: RentBundle:Admin:dash }
+    defaults: { _controller: RentBundle:Admin:home }
 
 location_homepage:
     path:     /location
@@ -35,15 +35,14 @@ location_edit:
     defaults: { _controller: RentBundle:Location:edit }
   
 location_delete:
-    path:    /deleteRent/{id}
+    path:    /deleteRent{id}
     defaults: { _controller: "RentBundle:Location:delete" }
-
 
 location_rech:
     path:    /rech{id}
     defaults: { _controller: RentBundle:Location:recherche }
 
-reservation_index:
+reservation_homepage:
     path:     /reservation
     defaults: { _controller: "RentBundle:Reservation:index" }
    
@@ -51,21 +50,31 @@ reservation_show:
     path:    /showReserv{id}
     defaults: { _controller: "RentBundle:Reservation:show" }
   
-
 reservation_new:
     path:     /newReserv
     defaults: { _controller: "RentBundle:Reservation:new" }
    
-
 reservation_edit:
     path:     /editReserv{id}
     defaults: { _controller: "RentBundle:Reservation:edit" }
   
-
 reservation_delete:
-    path:     /deleteReserv/{id}
+    path:     /deleteReserv{id}
     defaults: { _controller: "RentBundle:Reservation:delete" }
   
 reservation_notif:  
-    path:     /notif/{id}
+    path:     /notif{id}
     defaults: { _controller: "RentBundle:Reservation:notif" }
+
+      
+reservation_calendar:  
+    path:     /calend
+    defaults: { _controller: "RentBundle:Reservation:reserver" }
+
+
+      
+fullcalendar_loader:
+    path: /fc-load-events
+    defaults: { _controller: ADesignsCalendarBundle:Calendar:loadCalendar }
+    options:
+        expose: true

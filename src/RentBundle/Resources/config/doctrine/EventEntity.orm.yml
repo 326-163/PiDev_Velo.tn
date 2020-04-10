@@ -1,0 +1,36 @@
+RentBundle\Entity\EventEntity:
+    type: entity
+    table: null
+    repositoryClass: RentBundle\Repository\EventEntityRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        url:
+            type: string
+            length: 255
+        bgColor:
+            type: string
+            length: 255
+        fgColor:
+            type: string
+            length: 255
+        cssClass:
+            type: string
+            length: 255
+        startDatetime:
+            type: datetime
+        endDatetime:
+            type: datetime
+        allDay:
+            type: boolean
+            nullable: true
+        otherFields:
+            type: array
+    lifecycleCallbacks: {  }

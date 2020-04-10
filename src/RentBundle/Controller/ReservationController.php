@@ -30,7 +30,7 @@ class ReservationController extends Controller
         return $this->render('reservation/index.html.twig', array(
             'reservations' => $reservations,
         ));
-          var_dump($locations); die();
+          var_dump($reservations); die();
     }
       
     /**
@@ -90,7 +90,7 @@ class ReservationController extends Controller
      * Displays a form to edit an existing reservation entity.
      *
      */
-    public function editAction(Request $request, Reservation $reservation)
+    public function editAction(Request $request,$id)
     {
        $deleteForm = $this->createDeleteForm($reservation);
         $editForm = $this->createForm('RentBundle\Form\ReservationType', $reservation);
@@ -146,5 +146,8 @@ class ReservationController extends Controller
     {
 
     }
-   
+    public function reserverAction()
+    {
+      return $this->render('RentBundle:reservation:cal.html.twig');
+    }
 }

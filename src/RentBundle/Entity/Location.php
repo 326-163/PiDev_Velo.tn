@@ -4,6 +4,7 @@ namespace RentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTimeTime;
 
 /**
  * Location
@@ -66,6 +67,14 @@ class Location
      */
     private $rating = '0';
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCreation", type="date", nullable=false)
+     * @Assert\Date
+     * @Assert\GreaterThanOrEqual("today")
+     */
+    private $dateCreation;
 
     /**
      * @ORM\OneToMany(targetEntity="RentBundle\Entity\Reservation",mappedBy="Location")
@@ -202,7 +211,29 @@ class Location
         return $this->rating;
     }
     
-   
+   /**
+     * Set dateCreation
+     *
+     * @param \DateTime $dateCreation
+     *
+     * @return Location
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
 
 }
 
