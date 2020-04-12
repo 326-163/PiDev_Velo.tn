@@ -25,7 +25,7 @@ class LocationController extends Controller
 
     public function indexAction()
     {
-      $user =$this->getUser();
+      //$user =$this->getUser();
       //if($user){
         $em = $this->getDoctrine()->getManager();
         $locations = $em->getRepository('RentBundle:Location')->findAll();

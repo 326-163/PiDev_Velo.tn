@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Velo.tn</title>
+      {% block stylesheets %}
     <link rel="icon" href="img/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -24,6 +25,7 @@
     <link rel="stylesheet" href="css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+       {% endblock %}
 </head>
 
 <body>
@@ -108,8 +110,16 @@
                                         <a class="dropdown-item" href="single-blog.html">Single blog</a>
                                     </div>
                                 </li>
-                                   <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('rent_homepage') }}">Location</a> 
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Location
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="{{ path('location_new') }}"> Louer</a>
+                                        <a class="dropdown-item" href="{{ path('location_homepage') }}">Reserver</a>
+                                        
+                                    </div>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Contact</a>
@@ -155,9 +165,9 @@
                         <div class="single_banner_slider">
                             <div class="banner_text">
                                 <div class="banner_text_iner">
-                                    <h5>Winter Fasion</h5>
-                                    <h1>Fashion Collection 2019</h1>
-                                    <a href="#" class="btn_1">shop now</a>
+                                    <h5>Velo.tn</h5>
+                                    <h2>Pour les cyclistes par les cyclistes</h2>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -176,7 +186,7 @@
                     <div class="single_feature_post_text">
                         <img src="img/feature_1.png" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">shop for male</a>
+                            <a href="single-product.html" class="btn_2">Achat</a>
                         </div>
                     </div>
                 </div>
@@ -184,7 +194,7 @@
                     <div class="single_feature_post_text">
                         <img src="img/feature_2.png" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">shop for male</a>
+                            <a href="location.html.twig" class="btn_2">Location</a>
                         </div>
                     </div>
                 </div>
@@ -192,7 +202,7 @@
                     <div class="single_feature_post_text">
                         <img src="img/feature_3.png" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">shop for male</a>
+                            <a href="single-product.html" class="btn_2">Vente</a>
                         </div>
                     </div>
                 </div>
@@ -207,16 +217,16 @@
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <div class="arrival_tittle">
-                        <h2>new arrival</h2>
+                        <h2>Nos produits</h2>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="arrival_filter_item filters">
                         <ul>
-                            <li class="active controls" data-filter="*">all</li>
-                            <li class="controls" data-toggle=".men">men</li>
-                            <li class="controls" data-toggle=".women">women</li>
-                            <li class="controls" data-toggle=".shoes">shoes</li>
+                            <li class="active controls" data-filter="*">Tous</li>
+                            <li class="controls" data-toggle=".men">Vélo</li>
+                            <li class="controls" data-toggle=".women">Pieces de rechanges</li>
+                            <li class="controls" data-toggle=".shoes">Accessoires</li>
                         </ul>
                     </div>
                 </div>
@@ -228,6 +238,63 @@
                     <div class="new_arrival_iner filter-container">
                         <div class="single_arrivel_item weidth_1 mix shoes">
                             <img src="img/arrivel/arrivel_5.png" alt="#">
+                            <div class="hover_text">
+                                <p>Canvas</p>
+                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
+                                <div class="rate_icon">
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                </div>
+                                <h5>$150</h5>
+                                <div class="social_icon">
+                                    <a href="#"><i class="ti-heart"></i></a>
+                                    <a href="#"><i class="ti-bag"></i></a>
+                                </div>
+                            </div>
+                        </div>
+						   <div class="single_arrivel_item weidth_2 mix women">
+                            <img src="img/arrivel/arrivel_10.png" alt="#">
+                            <div class="hover_text">
+                                <p>Canvas</p>
+                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
+                                <div class="rate_icon">
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                </div>
+                                <h5>$150</h5>
+                                <div class="social_icon">
+                                    <a href="#"><i class="ti-heart"></i></a>
+                                    <a href="#"><i class="ti-bag"></i></a>
+                                </div>
+                            </div>
+                        </div>
+						   <div class="single_arrivel_item weidth_2 mix women">
+                            <img src="img/arrivel/arrivel_8.png" alt="#">
+                            <div class="hover_text">
+                                <p>Canvas</p>
+                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
+                                <div class="rate_icon">
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                    <a href="#"> <i class="fas fa-star"></i> </a>
+                                </div>
+                                <h5>$150</h5>
+                                <div class="social_icon">
+                                    <a href="#"><i class="ti-heart"></i></a>
+                                    <a href="#"><i class="ti-bag"></i></a>
+                                </div>
+                            </div>
+                        </div>
+						   <div class="single_arrivel_item weidth_2 mix women">
+                            <img src="img/arrivel/arrivel_7.png" alt="#">
                             <div class="hover_text">
                                 <p>Canvas</p>
                                 <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
@@ -456,6 +523,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="single_footer_part">
                         <h4>Newsletter</h4>
+						<p>Inscrivez-vous à la liste de diffusion Acorn+ pour recevoir des informations sur les nouveaux arrivants, des offres spéciales et d'autres informations sur les réductions</p>
                         <div id="mc_embed_signup">
                             <form target="_blank"
                                 action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
@@ -489,6 +557,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!--::footer_part end::-->
 
+	{% block javascripts %}
     <!-- jquery plugins here-->
     <script src="js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
@@ -515,6 +584,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/mail-script.js"></script>
     <!-- custom js -->
     <script src="js/custom.js"></script>
+          {% endblock %}
 </body>
 
 </html>

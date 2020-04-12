@@ -30,7 +30,7 @@
 
  
   <body>
-    <!--::header part start::-->
+     <!--::header part start::-->
     <header class="main_menu home_menu">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-center">
@@ -46,7 +46,7 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html.twig">Home</a>
+                                    <a class="nav-link" href="index.html">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -89,7 +89,7 @@
                                        Event
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html.twig"> 
+                                        <a class="dropdown-item" href="login.html"> 
                                             login
                                             
                                         </a>
@@ -111,11 +111,19 @@
                                         <a class="dropdown-item" href="single-blog.html">Single blog</a>
                                     </div>
                                 </li>
-                                   <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('location_homepage') }}">Location</a> 
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Location
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="{{ path('location_new') }}"> Louer</a>
+                                        <a class="dropdown-item" href="{{ path('location_homepage') }}">Reserver</a>
+                                        
+                                    </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html.twig">Contact</a>
+                                    <a class="nav-link" href="contact.html">Contact</a>
                                 </li>
                             </ul>
                         </div>

@@ -9,27 +9,27 @@ fos_user:
     
 rent:
     resource: "@RentBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /rent
 
 product:
     resource: "@ProductBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /produit
 
 event:
     resource: "@EventBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /event
 
 circuit:
     resource: "@CircuitBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /circuit
 
 blog:
     resource: "@BlogBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /blog
 
 annonce:
     resource: "@AnnonceBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /annonce
 
 app:
     resource: '@AppBundle/Controller/'
