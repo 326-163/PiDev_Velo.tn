@@ -21,12 +21,15 @@
 
             <div>
               <TR>
-                <td>     <!--client--> 
+              {% if is_granted ('ROLE_VISITEUR') %}  <!--client--> 
+                <td>    
                   <a href="{{ path('reservation_new') }}" class="btn btn-primary btn-sm">Reserver</a>
                 </td>
+                {% elseif is_granted ('ROLE_ADMIN') %}
                 <td>  <!--locataire-->                    
                   <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a> 
                 </td>
+                {% endif %}
               </TR>
             </div>
           </div>

@@ -19,16 +19,12 @@ location_homepage:
     defaults: { _controller: RentBundle:Location:index }
 
 location_new:
-    path:     /newRent
+    path:     /addRent
     defaults: { _controller: RentBundle:Location:new }
 
 location_show:
     path:     /showRent{id}
     defaults: { _controller: RentBundle:Location:show }
-
-location_confirmation:
-    path:     /confirme
-    defaults: { _controller: RentBundle:Location:confirme }
 
 location_edit:
     path:    /editRent{id}
@@ -36,27 +32,31 @@ location_edit:
   
 location_delete:
     path:    /deleteRent{id}
-    defaults: { _controller: "RentBundle:Location:delete" }
+    defaults: { _controller: RentBundle:Location:delete }
 
-location_rech:
-    path:    /rech{id}
-    defaults: { _controller: RentBundle:Location:recherche }
+location_confirmation:
+    path:     /confirme
+    defaults: { _controller: RentBundle:Location:confirme }
 
+location_search:
+    path:    /recherche
+    defaults: { _controller: RentBundle:Location:searchbytitle }
+   
 reservation_homepage:
     path:     /reservation
-    defaults: { _controller: "RentBundle:Reservation:index" }
+    defaults: { _controller: RentBundle:Reservation:index }
    
 reservation_show:
     path:    /showReserv{id}
-    defaults: { _controller: "RentBundle:Reservation:show" }
+    defaults: { _controller: RentBundle:Reservation:show }
   
 reservation_new:
-    path:     /newReserv
-    defaults: { _controller: "RentBundle:Reservation:new" }
+    path:     /addReserv
+    defaults: { _controller: RentBundle:Reservation:new }
    
 reservation_edit:
     path:     /editReserv{id}
-    defaults: { _controller: "RentBundle:Reservation:edit" }
+    defaults: { _controller: RentBundle:Reservation:edit }
   
 reservation_delete:
     path:     /deleteReserv{id}
@@ -71,8 +71,22 @@ reservation_calendar:
     path:     /calend
     defaults: { _controller: "RentBundle:Reservation:reserver" }
 
+tri_prix_asc:
+    path:     /tripasc
+    defaults: { _controller: "RentBundle:Reservation:lowprix" }
 
-      
+tri_prix_Desc:
+    path:     /tripdesc
+    defaults: { _controller: "RentBundle:Reservation:highprix" }
+
+tri_date_asc:
+    path:     /tridateasc
+    defaults: { _controller: "RentBundle:Reservation:lowdate" }
+
+tri_date_Desc:
+    path:     /tridatedesc
+    defaults: { _controller: "RentBundle:Reservation:highdate" }
+
 fullcalendar_loader:
     path: /fc-load-events
     defaults: { _controller: ADesignsCalendarBundle:Calendar:loadCalendar }

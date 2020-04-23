@@ -15,8 +15,8 @@ class LocationType extends AbstractType
     {
         $builder->add('titre')->add('lieu')->add('prix')->add('photo')->add('rating');
     }/**
-     * {@inheritdoc}
-     */
+ * {@inheritdoc}
+ */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(

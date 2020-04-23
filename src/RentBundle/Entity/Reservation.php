@@ -47,7 +47,7 @@ class Reservation
      *  @ORM\ManyToOne(targetEntity="RentBundle\Entity\Location",inversedBy="Reservation")
      * @ORM\JoinColumn(name="Id_location",referencedColumnName="id")
      */
-    protected $id_L; 
+    protected $id_L;
 
 
     /**
@@ -84,7 +84,7 @@ class Reservation
     {
         return $this->dateDeb;
     }
-   
+
     /**
      * Set dateFin
      *
@@ -115,8 +115,8 @@ class Reservation
      * @ORM\Column(name="id_U", type="integer", nullable=false)
      */
     private $idU;
-    
-  
+
+
 
     /**
      * @return mixed
@@ -135,4 +135,3 @@ class Reservation
     }
 
 }
-

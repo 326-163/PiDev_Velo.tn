@@ -1,22 +1,26 @@
 <?php
-
 namespace RentBundle\Controller;
 
+use RentBundle\RentBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
+
 
 class AdminController extends Controller
 {
     public function homeAction(Request $request)
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) { 
-            throw $this->createNotFoundException('You are not allowed to access this page');  
-        }
+      //  if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+          //  throw $this->createNotFoundException('You are not allowed to access this page');
+     //   }
     
-        return $this->render('RentBundle:admin:dashebord.html.twig');   
+        return $this->render('RentBundle:admin:dashebord.html.twig');
     
 
        /* if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            return $this->render('EcommerceBundle:Dashebord:index.html.twig');    
+            return $this->render('RentBundle:Admin:index.html.twig');
         }else{
             return $this->render('EcommerceBundle:Ecommerce:index.html.twig'); 
         }*/

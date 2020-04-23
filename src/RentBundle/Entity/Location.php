@@ -56,7 +56,9 @@ class Location
     /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="string", length=20, nullable=false)
+     * @ORM\Column(name="photo", type="string", length=500000, nullable=false)
+     * @Assert\File(maxSize="500k", mimeTypes={"image/jpeg", "image/jpg", "image/png", "image/GIF"})
+     * @Assert\NotBlank
      */
     private $photo;
 
@@ -210,8 +212,8 @@ class Location
     {
         return $this->rating;
     }
-    
-   /**
+
+    /**
      * Set dateCreation
      *
      * @param \DateTime $dateCreation
@@ -236,4 +238,3 @@ class Location
     }
 
 }
-

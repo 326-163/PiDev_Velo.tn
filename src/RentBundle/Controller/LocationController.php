@@ -3,6 +3,7 @@
 namespace RentBundle\Controller;
 
 use RentBundle\Entity\Location;
+use RentBundle\Form\LocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 /**
  * Location controller.
  *
@@ -22,7 +25,6 @@ class LocationController extends Controller
      * Home.
      *
     */
-
     public function indexAction()
     {
       //$user =$this->getUser();
@@ -43,34 +45,46 @@ class LocationController extends Controller
      * Creates a new location entity.
      *
      */
-    /*public function newAction(Request $request)
+    public function newAction(Request $request)
     {
+        //   $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $location = new Location();
         $form = $this->createForm('RentBundle\Form\LocationType', $location);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $file=$location->getPhoto();
+            $filename= md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('photos_directory'),$filename);
+            $location->setPhoto($filename);
+
+            $location->setdateCreation(new \DateTime('now'));
             $em->persist($location);
             $em->flush();
 
-            return $this->redirectToRoute('location_show', array('id' => $location->getId()));
-        }
+            $this->addFlash('success','publication ajoutee !');
 
+            return $this->redirectToRoute('location_homepage');
+        }
         return $this->render('RentBundle:location:new.html.twig', array(
-            'location' => $location,
+//          'location' => $location,
             'form' => $form->createView(),
         ));
-    }*/
-    public function newAction(Request $request)
+    }
+
+
+
+    /*public function newAction(Request $request)
     {
-            // $user =$this->getUser();
-    //if($user){
+      $user =$this->getUser();
+       if($user){
+        
       $em=$this->getDoctrine()->getEntityManager();
       $location = new Location();
-/*}else{
+       }else{
         $this->redirectToRoute('fos_user_security_login');
-      }*/
+      }
       $form=$this->createFormBuilder($location)
       ->add('titre',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
       ->add('lieu',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
@@ -93,7 +107,7 @@ class LocationController extends Controller
    $em->persist ($location);
    $em->flush();
 
-   //$this->addFlash('success','your rent has been successfuly persisted !');
+   $this->addFlash('success','your rent has been successfuly persisted !');
 
    return $this->redirect ($this->generateUrl('location_confirmation'));
  }
@@ -101,7 +115,7 @@ class LocationController extends Controller
 return $this->render('RentBundle:location:new.html.twig', array (
   'form'=>$form->createView()
 )) ; 
-    }
+    }*/
 
     /**
      * Finds and displays a location entity.
@@ -179,22 +193,12 @@ return $this->render('RentBundle:location:edit.html.twig', array (
      */
     public function deleteAction($id)
     {
-      /*  $form = $this->createDeleteForm($location);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($location);
-            $em->flush();
-        }
-        return $this->redirectToRoute('location_homepage');*/
-
         $em=$this->getDoctrine()->getEntityManager();
         $location = $em->getRepository('RentBundle:Location')->find($id);
        
         $em->remove($location);
         $em->flush();
-        return $this->redirect ($this->generateUrl('location_homepage'));
+        return $this->redirectToRoute('location_homepage');
     }
    
    
@@ -222,6 +226,15 @@ return $this->render('RentBundle:location:edit.html.twig', array (
         return $this->render('RentBundle:location:confirmation.html.twig');
     }
 
+    public function searchbytitleAction(){
+        $em=$this->getDoctrine()->getEntityManager();
+        $location = $em->getRepository(Location::class)->findAll();
+
+        return $this->render('@Rent/location/search.html.twig',array
+        ('location'=>$location));
+
+    }
+    
    /* public function rechercheAction(Request $request)
     {
          $em=$this->getDoctrine()->getManager();
@@ -235,16 +248,8 @@ return $this->render('RentBundle:location:edit.html.twig', array (
         ));
     }
     
-      public function searchbynameAction($name){
-        $club = $this->getDoctrine()->getRepository(Club::class);
-        $re =$club->myfindName($name);
-        dump($re);
-        die();
-        return $this->render('@Club/Club/search.html.twig',
-            ['club'=>$re]);
-
-    }
-    public function getelementAction($id){
+     
+    /*public function getelementAction($id){
         $club = $this->getDoctrine()->getRepository(Club::class);
         $re =$club->findonebyname($id);
         //dump($re);
@@ -274,5 +279,33 @@ return $this->render('RentBundle:location:edit.html.twig', array (
  }
  }
     */
- 
+    public function highdateAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('RentBundle:Location')->findBy([], ['dateCreation' => 'DESC']);
+        return $this->render( '@Rent/location/show.html.twig', array('locations'=> $rep));
+    }
+
+    public function lowdateAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('RentBundle:Location')->findBy([], ['dateCreation' => 'ASC']);
+        return $this->render( '@Rent/location/show.html.twig', array('locations'=> $rep));
+    }
+
+    public function highprixAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('RentBundle:Location')->findBy([], ['prix' => 'DESC']);
+        return $this->render( '@Rent/location/show.html.twig', array('locations'=> $rep));
+    }
+
+    public function lowprixAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('RentBundle:Location')->findBy([], ['prix' => 'ASC']);
+        return $this->render( '@Rent/location/show.html.twig', array('locations'=> $rep));
+    }
+
 }

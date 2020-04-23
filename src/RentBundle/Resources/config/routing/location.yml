@@ -14,11 +14,16 @@ location_new:
     methods:  [GET, POST]
 
 location_edit:
-    path:    /editRent/{id}
+    path:    /editRent{id}
     defaults: { _controller: "RentBundle:Location:edit" }
     methods:  [GET, POST]
 
 location_delete:
-    path:    /deleteRent/{id}
+    path:    /deleteRent{id}
     defaults: { _controller: "RentBundle:Location:delete" }
     methods:  DELETE
+
+location_search:
+    path:    /rech
+    defaults: { _controller: "RentBundle:Location:searchbytitle" }
+    methods:  [POST]

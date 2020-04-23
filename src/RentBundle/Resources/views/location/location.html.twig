@@ -12,39 +12,45 @@
     </div>
 {% endfor %}
         <thead>
-            <tr>              
-                <th>Titre</th>
-                <th>Lieu</th>
-                <th>Prix</th>
-                <th>Photo</th>
+            <tr>  
+                <th>Photo</th>            
+                <th>Titre</th>              
+                <th>Prix</th>            
                 <th>Rating</th>
+                <th>Publié </th>
+                <th>Lieu</th>
             </tr>
         </thead>
 
         <tbody>
         {% for location in locations %}
             <tr>
-                <td>{{ location.titre }}</td>
-                <td>{{ location.lieu }}</td>
-                <td>{{ location.prix }}</td>
-                <td>{{ location.photo }}</td>
+               <td>{{ location.photo }}</td>
+                <td>{{ location.titre }}</td>           
+                <td>{{ location.prix }}</td>            
                 <td>{{ location.rating }}</td>
-              
+                <td>{{ location.dateCreation }}</td>
+                <td>{{ location.lieu }}</td>
+
                 <TD>
          <a href="{{ path('location_show', { 'id': location.id }) }}" class="btn btn-primary btn-sm">Afficher</a>
+         {% if is_granted ('ROLE_ADMIN') % }
          <a href="{{ path('location_delete', { 'id': location.id }) }}" class="btn btn-danger btn-sm"> Supprimer </a>
-                </Td>
+               {% endif %}
+                </TD>
+                
             </tr>
         {% endfor %}
         </tbody>
     </table>
     </div>
-
+{% if is_granted ('ROLE_USER') %}
     <ul>
         <li>
-            <a href="{{ path('location_new') }}" class ="btn btn-default">Create a new location</a>
+            <a  href="" class ="btn btn-default" >Create a new location</a>
         </li>
     </ul>
+    {% endif %}
 {% endblock %}
 
 

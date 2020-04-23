@@ -1,17 +1,33 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
   {% block title %} Velo.tn {% endblock %}
 
 
 {% block body %}
+    {% if is_granted ('ROLE_USER') %}
 
-<div class="text-center" ><h1> Ajout location : locataire</h1> <br/>
-<br></div>
-<div class="container">
+        {{ form_start(form) }}
+	<br><br><br><br> <div class="text-center"><h1> Formulaire ajout location </h1></div><br><br><br><br>
+
+
+    <div class="container">
         {{ form_start(form) }}
 
         {{ form_widget(form) }}
 
+        <button type="submit" class="btn btn-success btn-sm"> Valider </button>
         {{ form_end(form) }}
-</div>
+
+    </div>
+    {% endif %}
 {% endblock %}
+
+
+
+
+        
+
+
+       
+
+       
