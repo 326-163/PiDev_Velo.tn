@@ -29,12 +29,12 @@
                 <td>{{ location.titre }}</td>           
                 <td>{{ location.prix }}</td>            
                 <td>{{ location.rating }}</td>
-                <td>{{ location.dateCreation }}</td>
+                <td>{{ location.dateCreation |date('Y-m-d') }}</td>
                 <td>{{ location.lieu }}</td>
 
                 <TD>
          <a href="{{ path('location_show', { 'id': location.id }) }}" class="btn btn-primary btn-sm">Afficher</a>
-         {% if is_granted ('ROLE_ADMIN') % }
+         {% if is_granted ('ROLE_ADMIN') %}
          <a href="{{ path('location_delete', { 'id': location.id }) }}" class="btn btn-danger btn-sm"> Supprimer </a>
                {% endif %}
                 </TD>
