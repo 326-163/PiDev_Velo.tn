@@ -47,7 +47,7 @@ class LocationController extends Controller
      */
     public function newAction(Request $request)
     {
-        //   $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $location = new Location();
         $form = $this->createForm('RentBundle\Form\LocationType', $location);
         $form->handleRequest($request);

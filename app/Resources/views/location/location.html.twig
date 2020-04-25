@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="text-center" ><h1> Liste des locations disponible : Admin </h1> <br/>
+    {% block title %} velo.tn {% endblock %}
+    <div class="text-center" ><h1> Liste des locations disponible </h1> <br/>
 <br>
 
     <table class="table_striped">
@@ -17,33 +18,39 @@
                 <th>Prix</th>
                 <th>Photo</th>
                 <th>Rating</th>
+                <th>Publié le</th>
             </tr>
         </thead>
 
         <tbody>
         {% for location in locations %}
             <tr>
+                <td><a href="{{ path('location_show', { 'id': location.id }) }}">{{ location.id }}</a></td>
                 <td>{{ location.titre }}</td>
                 <td>{{ location.lieu }}</td>
                 <td>{{ location.prix }}</td>
                 <td>{{ location.photo }}</td>
                 <td>{{ location.rating }}</td>
-              
+                <td>{{ location.rating }}</td>
+                <td>{{ location.dateCreation }}</td>
                 <TD>
          <a href="{{ path('location_show', { 'id': location.id }) }}" class="btn btn-primary btn-sm">Afficher</a>
+                    {% if is_granted ('ROLE_USER') %)
          <a href="{{ path('location_delete', { 'id': location.id }) }}" class="btn btn-danger btn-sm"> Supprimer </a>
+                    {% endif %}
                 </Td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     </div>
-
+  {% if is_granted ('ROLE_USER') %)
     <ul>
         <li>
             <a href="{{ path('location_new') }}" class ="btn btn-default">Create a new location</a>
         </li>
     </ul>
+      {% endif %}
 {% endblock %}
 
 

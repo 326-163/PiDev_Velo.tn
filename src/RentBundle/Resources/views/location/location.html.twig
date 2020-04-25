@@ -2,7 +2,7 @@
 
 {% block body %}
   {% block title %} Velo.tn {% endblock %}
-<div class="text-center" ><h1> Liste des locations disponible : Admin </h1> <br/>
+<div class="text-center" ><h1> Liste des locations disponible </h1> <br/>
 <br>
 
     <table class="table_striped">
@@ -17,7 +17,7 @@
                 <th>Titre</th>              
                 <th>Prix</th>            
                 <th>Rating</th>
-                <th>Publié </th>
+                <th>Publié le</th>
                 <th>Lieu</th>
             </tr>
         </thead>
@@ -44,14 +44,14 @@
         </tbody>
     </table>
     </div>
+    <br>   <br>
 {% if is_granted ('ROLE_USER') %}
     <ul>
         <li>
-            <a  href="" class ="btn btn-default" >Create a new location</a>
+
+            <a  href="{{ path('location_new') }}"type="button" class="btn btn-outline-info">Create a new location</a>
         </li>
     </ul>
     {% endif %}
+    <br>   <br>
 {% endblock %}
-
-
-

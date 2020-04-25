@@ -23,7 +23,7 @@ class ReservationController extends Controller
         // $user =$this->getUser();
     //if($user){
         $em = $this->getDoctrine()->getManager();
-        $reservations = $em->getRepository('RentBundle:Reservation')->findAll();  
+        $reservations = $em->getRepository('RentBundle:Reservation')->findAll();
     /*}else{
         $this->redirectToRoute('fos_user_security_login');
       }*/
@@ -39,7 +39,7 @@ class ReservationController extends Controller
      */
     public function newAction(Request $request)
     {
-         // $user =$this->getUser();
+         //$user =$this->getUser();
         //if($user){
         $em=$this->getDoctrine()->getEntityManager();
         $reservation = new Reservation();
@@ -63,7 +63,7 @@ class ReservationController extends Controller
   
      $this->addFlash('success','reservation ajoutée avec succees  !');
   
-     return $this->redirect ($this->generateUrl('reservation_show'));
+     return $this->redirect ($this->generateUrl('reservation_calendar' ));
    }
   
   return $this->render('RentBundle:reservation:new.html.twig', array (
@@ -80,17 +80,16 @@ class ReservationController extends Controller
     {
       $em = $this->getDoctrine()->getEntityManager();
       $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
-      $locations = $em->getRepository('RentBundle:Location')->findAll();
+      $reservations = $em->getRepository('RentBundle:Reservation')->findAll();
       return $this->render('RentBundle:reservation:show.html.twig',array(
         'reservation' => $reservation,
-        'locations' => $locations,
       ));
     }
     /**
      * Displays a form to edit an existing reservation entity.
      *
      */
-    public function editAction(Request $request,$id)
+    public function editAction(Request $request,Reservation $reservation,$id)
     {
        $deleteForm = $this->createDeleteForm($reservation);
         $editForm = $this->createForm('RentBundle\Form\ReservationType', $reservation);
@@ -112,18 +111,13 @@ class ReservationController extends Controller
      * Deletes a reservation entity.
      *
      */
-    public function deleteAction(Request $request, Reservation $reservation)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($reservation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($reservation);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('reservation_index');
+        $em=$this->getDoctrine()->getEntityManager();
+        $location = $em->getRepository('RentBundle:Reservation')->find($id);
+        $em->remove($reservation);
+        $em->flush();
+        return $this->redirectToRoute('reservation_homepage');
     }
 
     /**

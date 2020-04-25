@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+    {% block title %} velo.tn {% endblock %}
 <!-- Page Content -->
     <div class="container">
       <div class="row">
-          {% block title %}<div class="text-center" ><h1> Affichage location: locataire/client </h1> <br/>{% endblock %}
+         <div class="text-center" ><h1> Affichage location </h1> <br/>
             <br>
           <div class="list-group">      
               <a href="{{ path('location_show',{'id':location.id}) }}" </a>
@@ -16,12 +16,14 @@
               <h3 class="card-title">{{ location.titre }}</h3>
               <h4>{{ location.prix }}DT</h4>
               <h4>{{ location.rating }}</h4>
+                <h4>{{ location.dateCreation }}</h4>
               <br><br>
                   <div>
                   <!--client--> 
                      <a href="{{ path('reservation_new') }}" class="btn btn-primary">Reserver</a>
-                     <!--locataire--> 
-                      <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a> 
+                      {% if is_granted ('ROLE_USER') %)
+                      <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a>
+                      {% endif %}
                     </div>
           </div>
           <!-- /.card -->

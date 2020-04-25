@@ -38,7 +38,7 @@ class Reservation
      * @ORM\Column(name="dateFin", type="date")
      * @Assert\Date
      * @Assert\GreaterThanOrEqual(
-     *  propertyPath="dateDebut", message="La date du fin doit
+     *  propertyPath="dateDeb", message="La date du fin doit
      *  être supérieure à la date début")
      */
     protected $dateFin;

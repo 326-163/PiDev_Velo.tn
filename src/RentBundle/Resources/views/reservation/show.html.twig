@@ -5,7 +5,7 @@
 <!-- Page Content -->
   
     
-          <div class="text-center" ><h1> Affichage reservation: client </h1> <br/> </div> 
+          <div class="text-center" ><h1> Affichage reservation </h1> <br/> </div>
 
           <br>   <br> 
     <table class="table_striped">
@@ -21,11 +21,11 @@
           
         </tbody>
     </table>
-   
+{% if is_granted ('ROLE_USER') %}
         <td>                  
             <a href="{{ path('reservation_edit', { 'id': reservation.id }) }}" class="btn btn-warning "> Modifier </a>
             <a href="{{ path('reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger "> Supprimer </a>                    
         </td>
-         {% endif %}
+ {% endif %}
          <br>       <br>   <br>   <br>   <br>    <br>   <br> 
 {% endblock %}
