@@ -1,3 +1,7 @@
+mobile_api:
+    resource: "@MobileAPIBundle/Resources/config/routing.yml"
+    prefix:   /api
+
 adesigns_calendar:
     resource: "@ADesignsCalendarBundle/Resources/config/routing.xml" 
 

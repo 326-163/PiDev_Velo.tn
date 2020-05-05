@@ -71,6 +71,9 @@ reservation_calendar:
     path:     /calend
     defaults: { _controller: "RentBundle:Reservation:reserver" }
 
+reservation_accept:
+    path:     /accepter
+    defaults: { _controller: "RentBundle:Reservation:accept" }
 tri_prix_asc:
     path:     /tripasc
     defaults: { _controller: "RentBundle:Reservation:lowprix" }

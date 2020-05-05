@@ -114,7 +114,7 @@ class ReservationController extends Controller
     public function deleteAction($id)
     {
         $em=$this->getDoctrine()->getEntityManager();
-        $location = $em->getRepository('RentBundle:Reservation')->find($id);
+        $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
         $em->remove($reservation);
         $em->flush();
         return $this->redirectToRoute('reservation_homepage');
@@ -143,5 +143,10 @@ class ReservationController extends Controller
     public function reserverAction()
     {
       return $this->render('RentBundle:reservation:cal.html.twig');
+    }
+
+    public function acceptAction ()
+    {
+        return $this->render('RentBundle:reservation:cal.html.twig') ;
     }
 }

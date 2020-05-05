@@ -144,7 +144,7 @@ return $this->render('RentBundle:location:new.html.twig', array (
          }*/
 
 
-
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $em=$this->getDoctrine()->getEntityManager();
         $location = $em->getRepository('RentBundle:Location')->find($id);
 
@@ -220,26 +220,18 @@ return $this->render('RentBundle:location:new.html.twig', array (
         return $this->render('RentBundle:location:confirmation.html.twig');
     }
 
-    public function searchbytitleAction(){
-        $em=$this->getDoctrine()->getEntityManager();
-        $location = $em->getRepository(Location::class)->findAll();
+  
 
-        return $this->render('@Rent/location/search.html.twig',array
-        ('location'=>$location));
-
-    }
-
-    /* public function rechercheAction(Request $request)
+    public function searchbytitleAction(Request $request)
      {
           $em=$this->getDoctrine()->getManager();
-          $find=$em->getRepository(Location::class)->findAll();
+          $location = $em->getRepository(Location::class)->findAll();
           if ($request->isMethod('POST')){
-              $type=$request->get('titre');
-              $find=$em->getRepository(Location::class)->findBy(array('titre'=>$titre));
+              $titre=$request->get('titre');
+              $location=$em->getRepository("RentBundle:Location")->findBy(array('titre'=>$titre));
           }
-         return $this->render("RentBundle:location:show.html.twig", array(
-             "titre" => $titre
-         ));
+         return $this->render("RentBundle:location:search.html.twig",
+             array("location" => $location ) );
      }
 
 
