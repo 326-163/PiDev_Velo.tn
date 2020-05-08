@@ -4,10 +4,15 @@ namespace RentBundle\Controller;
 
 use RentBundle\Entity\Reservation;
 use RentBundle\Entity\Location;
+use RentBundle\Form\ReservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+
 /**
  * Reservation controller.
  *
@@ -47,28 +52,39 @@ class ReservationController extends Controller
           $this->redirectToRoute('fos_user_security_login');
         }*/
         $form=$this->createFormBuilder($reservation)
-        ->add('dateDeb',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-        ->add('dateFin',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-        ->add('Enregistrer',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-        ->getForm();
+            ->add('titre',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+            ->add('dateDeb',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+            ->add('dateFin',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+            ->add('Enregistrer',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+            ->getForm();
   
    $form->handleRequest($request);
-  
-   if ($form->isSubmitted() && $form->isValid() ) {
-     $reservation->setDateDeb($form['dateDeb']->getData());
-     $reservation->setDateFin($form['dateFin']->getData());
-      
-     $em->persist ($reservation);
-     $em->flush();
-  
-     $this->addFlash('success','reservation ajoutée avec succees  !');
-  
-     return $this->redirect ($this->generateUrl('reservation_calendar' ));
-   }
-  
-  return $this->render('RentBundle:reservation:new.html.twig', array (
-    'form'=>$form->createView()
-  )) ; 
+
+        if ($form->isSubmitted() && $form->isValid() )
+        {
+            $titre = $reservation->getTitre();
+            $em=$this->getDoctrine()->getEntityManager();
+            $array_location = $em->getRepository(Location::class) ->findByTitre($titre);
+            if ($array_location!= null )
+            {
+                $one_location_objet = $array_location[0];
+                $reservation->setLocation($one_location_objet);
+                ///reservation->setLocation($form['location']->getData());
+                //$reservation->setDateDeb($form['dateDeb']->getData());
+                //reservation->setDateFin($form['dateFin']->getData());
+                $em->persist ($reservation);
+                $em->flush();
+                $this->addFlash('success','reservation ajoutée avec succees  !');
+                return $this->redirect ($this->generateUrl('reservation_calendar' ));
+            } else {
+                return new Response ('erreur d affectation');
+            }
+        }
+
+        return $this->render('RentBundle:reservation:new.html.twig', array (
+            'form'=>$form->createView()
+        )) ;
+
     }
    
     

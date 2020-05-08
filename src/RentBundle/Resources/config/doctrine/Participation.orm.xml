@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="RentBundle\Entity\Participation" table="participation">
+    <indexes>
+      <index name="fk_idE" columns="id_E"/>
+      <index name="fk_idU" columns="id_U"/>
+    </indexes>
+    <id name="idPa" type="integer" column="id_Pa">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nbr" type="integer" column="nbr" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idE" type="integer" column="id_E" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idU" type="integer" column="id_U" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

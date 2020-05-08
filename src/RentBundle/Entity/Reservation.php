@@ -24,6 +24,13 @@ class Reservation
     protected $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=20, nullable=false)
+     */
+    private $titre;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateDeb", type="date", nullable=false)
@@ -43,11 +50,18 @@ class Reservation
      */
     protected $dateFin;
 
+
     /**
-     *  @ORM\ManyToOne(targetEntity="RentBundle\Entity\Location",inversedBy="Reservation")
-     * @ORM\JoinColumn(name="Id_location",referencedColumnName="id")
+     *  @ORM\ManyToOne(targetEntity="RentBundle\Entity\Location")
+     * @ORM\JoinColumn(name="id_location",referencedColumnName="id")
      */
-    protected $id_L;
+    protected $location;
+
+    /**
+     *  @ORM\ManyToOne(targetEntity="RentBundle\Entity\FosUser")
+     * @ORM\JoinColumn(name="id_user",referencedColumnName="id")
+     */
+    protected $user;
 
 
     /**
@@ -58,6 +72,22 @@ class Reservation
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * @param string $titre
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
     }
 
 
@@ -109,29 +139,39 @@ class Reservation
         return $this->dateFin;
     }
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_U", type="integer", nullable=false)
-     */
-    private $idU;
 
 
 
     /**
      * @return mixed
      */
-    public function getIdLocation()
+    public function getLocation()
     {
-        return $this->id_Location;
+        return $this->location;
     }
 
     /**
-     * @param mixed $id_Location
+     * @param mixed $location
      */
-    public function setIdLocation($id_Location)
+    public function setLocation($location)
     {
-        $this->id_Location = $id_Location;
+        $this->location = $location;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 }

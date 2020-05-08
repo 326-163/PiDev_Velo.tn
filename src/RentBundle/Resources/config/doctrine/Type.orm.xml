@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="RentBundle\Entity\Type" table="type">
+    <indexes>
+      <index name="fk_idA" columns="id_A"/>
+    </indexes>
+    <id name="idT" type="integer" column="id_T">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="achat" type="boolean" column="achat" nullable="true"/>
+    <field name="vente" type="boolean" column="vente" nullable="true"/>
+    <field name="idA" type="integer" column="id_A" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>
