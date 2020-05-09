@@ -41,6 +41,22 @@ location_confirmation:
 location_search:
     path:    /recherche
     defaults: { _controller: RentBundle:Location:searchbytitle }
+
+tri_prix_asc:
+    path:     /tripasc
+    defaults: { _controller: RentBundle:Location:lowprix }
+
+tri_prix_Desc:
+    path:     /tripdesc
+    defaults: { _controller: RentBundle:Location:highprix }
+
+tri_date_asc:
+    path:     /tridateasc
+    defaults: { _controller: RentBundle:Location:lowdate }
+
+tri_date_Desc:
+    path:     /tridatedesc
+    defaults: { _controller: RentBundle:Location:highdate }
    
 reservation_homepage:
     path:     /reservation
@@ -60,35 +76,21 @@ reservation_edit:
   
 reservation_delete:
     path:     /deleteReserv{id}
-    defaults: { _controller: "RentBundle:Reservation:delete" }
+    defaults: { _controller: RentBundle:Reservation:delete }
   
 reservation_notif:  
     path:     /notif{id}
-    defaults: { _controller: "RentBundle:Reservation:notif" }
+    defaults: { _controller: RentBundle:Reservation:notif }
 
       
 reservation_calendar:  
     path:     /calend
-    defaults: { _controller: "RentBundle:Reservation:reserver" }
+    defaults: { _controller: RentBundle:Reservation:reserver }
 
 reservation_accept:
     path:     /accepter
-    defaults: { _controller: "RentBundle:Reservation:accept" }
-tri_prix_asc:
-    path:     /tripasc
-    defaults: { _controller: "RentBundle:Reservation:lowprix" }
+    defaults: { _controller: RentBundle:Reservation:accept }
 
-tri_prix_Desc:
-    path:     /tripdesc
-    defaults: { _controller: "RentBundle:Reservation:highprix" }
-
-tri_date_asc:
-    path:     /tridateasc
-    defaults: { _controller: "RentBundle:Reservation:lowdate" }
-
-tri_date_Desc:
-    path:     /tridatedesc
-    defaults: { _controller: "RentBundle:Reservation:highdate" }
 
 fullcalendar_loader:
     path: /fc-load-events

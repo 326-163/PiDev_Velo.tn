@@ -5,6 +5,13 @@
 <div class="text-center" ><h1> Liste des locations disponible </h1> <br/>
 <br>
 
+  <a href="{{ path('tri_prix_asc') }}"  class="btn btn-outline-info btn-sm">prix bas</a>
+  <a href="{{ path('tri_prix_Desc') }}"  class="btn btn-outline-info btn-sm">prix Haut</a>
+  <a href="{{ path('tri_date_asc') }}"  class="btn btn-outline-info btn-sm">plus récent</a>
+  <a href="{{ path('tri_date_Desc') }}"  class="btn btn-outline-info btn-sm">plus ancien</a>
+       
+     
+
     <table class="table_striped">
 
 
@@ -13,7 +20,7 @@
             <tr>  
                 <th>Photo</th>            
                 <th>Titre</th>              
-                <th>Prix</th>            
+                <th>Prix DT</th>            
                 <th>Rating</th>
                 <th>Publié le</th>
                 <th>Lieu</th>

@@ -279,7 +279,6 @@ return $this->render('RentBundle:location:new.html.twig', array (
 
     public function highprixAction(Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['prix' => 'DESC']);
         return $this->render( '@Rent/location/show.html.twig', array('locations'=> $rep));
