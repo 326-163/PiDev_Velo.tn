@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 class LocationController extends Controller
 {
@@ -54,7 +56,7 @@ class LocationController extends Controller
     }
 
 
-    public function updateAction (){
+    public function updateAction (Request $request, $id){
         $em = $this->getDoctrine()->getManager()  ;
 
       $em->persist($location);
@@ -63,4 +65,19 @@ class LocationController extends Controller
         $formatted = $serializer->normalize($location);
         return new JsonResponse($formatted);
     }
+
+    public function deleteAction(Request $request)
+    {
+        $token = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $location = $this->getDoctrine()->getRepository(Location::class)->find($token);
+
+        $em->remove($location);
+        $em->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($location);
+        return new JsonResponse($formatted);
+    }
+
 }

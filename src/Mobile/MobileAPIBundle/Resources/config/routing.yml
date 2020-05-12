@@ -24,13 +24,22 @@ location_create:
     defaults: { _controller: MobileAPIBundle:Location:new}
 
 location_update:
-    path:     /location/update
+    path:     /location/update/{id}
     defaults: { _controller: MobileAPIBundle:Location:update}
 
 location_delete:
-    path:     /location/update
+    path:     /location/delete/{id}
     defaults: { _controller: MobileAPIBundle:Location:delete}
 
 reservations_create:
     path:     /reservation/new
     defaults: { _controller: MobileAPIBundle:Reservation:new}
+
+
+reservation_update:
+    path:     /reservation/update/{id}
+    defaults: { _controller: MobileAPIBundle:Reservation:update}
+
+reservation_delete:
+    path:     /reservation/delete/{id}
+    defaults: { _controller: MobileAPIBundle:Reservation:delete}

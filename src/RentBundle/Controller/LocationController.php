@@ -288,7 +288,11 @@ return $this->render('RentBundle:location:new.html.twig', array (
     {
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['prix' => 'ASC']);
-        return $this->render( '@Rent/location/show.html.twig', array('locations'=> $rep));
-    }
+        return $this->render('RentBundle:location:location.html.twig', array(
+            'locations' => $locations,
+        ));
+        var_dump($locations);
+        die();
+     }
 
 }

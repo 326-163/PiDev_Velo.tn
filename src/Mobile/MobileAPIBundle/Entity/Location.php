@@ -62,7 +62,7 @@ class Location
      *
      * @ORM\Column(name="dateCreation", type="date", nullable=false)
      */
-    private $datecreation;
+    private $dateCreation;
 
       /**
      * Get id

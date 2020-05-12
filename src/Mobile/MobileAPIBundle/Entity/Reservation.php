@@ -26,14 +26,14 @@ class Reservation
      *
      * @ORM\Column(name="dateDeb", type="date", nullable=false)
      */
-    private $datedeb;
+    private $dateDeb;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateFin", type="date", nullable=false)
      */
-    private $datefin;
+    private $dateFin;
 
 
 

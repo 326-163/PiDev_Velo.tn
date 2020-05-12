@@ -44,4 +44,19 @@ public function findAction($id)
         $formatted = $serializer->normalize($reservation);
         return new JsonResponse($formatted);
     }
+
+
+    public function deleteAction(Request $request)
+    {
+        $token = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $reservation = $this->getDoctrine()->getRepository(Reservation::class)->find($token);
+
+        $em->remove($reservation);
+        $em->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reservation);
+        return new JsonResponse($formatted);
+    }
 }
