@@ -267,21 +267,21 @@ return $this->render('RentBundle:location:new.html.twig', array (
     {
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['dateCreation' => 'DESC']);
-        return $this->render( '@Rent/location/show.html.twig', array('locations'=> $rep));
+        return $this->render( 'RentBundle:location:location.html.twig', array('locations'=> $rep));
     }
 
     public function lowdateAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['dateCreation' => 'ASC']);
-        return $this->render( '@Rent/location/show.html.twig', array('locations'=> $rep));
+        return $this->render( 'RentBundle:location:location.html.twig', array('locations'=> $rep));
     }
 
     public function highprixAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['prix' => 'DESC']);
-        return $this->render( '@Rent/location/show.html.twig', array('locations'=> $rep));
+        return $this->render( 'RentBundle:location:location.html.twig', array('locations'=> $rep));
     }
 
     public function lowprixAction(Request $request)
@@ -289,7 +289,7 @@ return $this->render('RentBundle:location:new.html.twig', array (
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['prix' => 'ASC']);
         return $this->render('RentBundle:location:location.html.twig', array(
-            'locations' => $locations,
+            'locations' => $rep,
         ));
         var_dump($locations);
         die();

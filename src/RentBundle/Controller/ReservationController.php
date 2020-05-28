@@ -55,7 +55,7 @@ class ReservationController extends Controller
             ->add('titre',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
             ->add('dateDeb',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
             ->add('dateFin',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-            ->add('Enregistrer',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+            ->add('Valider',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
             ->getForm();
   
    $form->handleRequest($request);
@@ -158,7 +158,7 @@ class ReservationController extends Controller
     }
     public function reserverAction()
     {
-      return $this->render('RentBundle:reservation:cal.html.twig');
+      return $this->render('RentBundle:reservation:calendrier.html.twig');
     }
 
     public function acceptAction ()

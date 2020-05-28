@@ -12,9 +12,9 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="datedeb" type="date" column="dateDeb" nullable="false"/>
-    <field name="datefin" type="date" column="dateFin" nullable="false"/>
-    <field name="idLocation" type="integer" column="id_location" nullable="true">
+    <field name="dateDeb" type="date" column="dateDeb" nullable="false"/>
+    <field name="dateFin" type="date" column="dateFin" nullable="false"/>
+    <field name="location" type="integer" column="id_location" nullable="true">
       <options>
         <option name="unsigned"/>
       </options>

@@ -8,7 +8,7 @@
       <div class="row">
 
         <div class="col-lg-3">
-        {% block title %} <div class="text-center" ><h1> Affichage reservation : client</h1> <br/> {% endblock %}
+        {% block title %} <div class="text-center" ><h1> Affichage reservation </h1> <br/> {% endblock %}
 <br>
 
           <div class="list-group">
@@ -19,13 +19,17 @@
         </div>
         <!-- /.col-lg-3 -->           
         <tbody>
+        <tr>
+        <th>Titre</th>
+        <td>{{ reservation.titre }}</td>
+        </tr>
             <tr>
                 <th>Datedeb</th>
-                <td>{% if reservation.datedeb %}{{ reservation.datedeb|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if reservation.dateDeb %}{{ reservation.dateDeb|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Datefin</th>
-                <td>{% if reservation.datefin %}{{ reservation.datefin|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if reservation.dateFin %}{{ reservation.dateFin|date('Y-m-d') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>

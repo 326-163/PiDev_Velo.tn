@@ -18,14 +18,40 @@ class LocationController extends Controller
 
     public function allAction ()
     {
-        $locations = $this->getDoctrine()->getManager()
-            ->getRepository('MobileAPIBundle:Location')
-            ->findAll();
-        $serializer = new Serializer ([new ObjectNormalizer()]);
-        $formatted = $serializer->normalize($locations);
+        $em = $this->getDoctrine()->getManager();
+        $reservations =$em->getRepository('MobileAPIBundle:Location')->findAll();
+
+       $normalizer = new ObjectNormalizer();
+         $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
+        $reservationss=array();
+        foreach ($reservations as $reservation) {
+
+            $r=array("id"=>$reservation->getId(),
+                    "titre"=>$reservation->getTitre(),
+                    "lieu"=>$reservation->getLieu(),
+                    "photo"=>$reservation->getPhoto(),
+                    "rating"=>$reservation->getRating(),
+                    "dateCreation"=>$reservation->getDateCreation()
+
+                );
+                   
+                   
+            array_push($reservationss,$r);
+
+        }
+        $formatted=$serializer->normalize($reservationss);
         return new JsonResponse($formatted);
 
-    }
+
+        }
+       
+
+    
 
     public function findAction($id)
     {
@@ -45,7 +71,7 @@ class LocationController extends Controller
         $location->setLieu($request->get('lieu'));
         $location->setPrix($request->get('prix'));
         $location->setPhoto($request->get('photo'));
-        $location->setRating($request->get('rating'));
+       // $location->setRating($request->get('rating'));
         $location->setDateCreation($request->get('dateCreation'));
        
         $em->persist($location);

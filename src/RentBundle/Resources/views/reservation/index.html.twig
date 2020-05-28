@@ -9,6 +9,7 @@
     <table class="table_striped">
         <thead>
         <tr>
+            <th>Titre</th>
             <th>Date debut</th>
             <th>Date fin</th>
             <th>Location</th>
@@ -17,9 +18,12 @@
         <tbody>
         {% for reservation in reservations %}
         <tr>
+            <td>{{ reservation.titre }}</td>
             <td>{% if reservation.dateDeb %}{{ reservation.dateDeb|date('Y-m-d') }}{% endif %}</td>
             <td>{% if reservation.dateFin %}{{ reservation.dateFin|date('Y-m-d') }}{% endif %}</td>
             <td>{{ reservation.location.titre }}</td>
+
+ 
             {% if is_granted ('ROLE_USER') %}
             <td>
             <a href="{{ path('reservation_accept', { 'id': reservation.id }) }}" class="btn btn-success btn-sm"> Accepter </a>

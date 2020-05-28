@@ -50,7 +50,6 @@ class Reservation
      */
     protected $dateFin;
 
-
     /**
      *  @ORM\ManyToOne(targetEntity="RentBundle\Entity\Location")
      * @ORM\JoinColumn(name="id_location",referencedColumnName="id")
