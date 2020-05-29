@@ -22,7 +22,7 @@ class AdminController extends Controller
        /* if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
             return $this->render('RentBundle:Admin:index.html.twig');
         }else{
-            return $this->render('EcommerceBundle:Ecommerce:index.html.twig'); 
+            return $this->render('RentBundle:admin:dashebord.html.twig');
         }*/
     }
 
@@ -34,9 +34,9 @@ class AdminController extends Controller
         return $this->render('RentBundle:admin:location.html.twig') ;
 
          /* if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            return $this->render('EcommerceBundle:Dashebord:index.html.twig');    
+            return $this->render('RentBundle:location:location.html.twig');
         }else{
-            return $this->render('EcommerceBundle:Ecommerce:index.html.twig'); 
+            return $this->render('RentBundle:location:location.html.twig');
         }*/
     }
 
