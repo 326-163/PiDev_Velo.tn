@@ -1,8 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
- {% block title %} Velo.tn {% endblock %}
-
+<br><br>
 <div class="text-center" ><h1> Liste des reservations </h1> <br/>
     <br>
 
@@ -15,13 +14,13 @@
             <th>Location</th>
         </tr>
         </thead>
-        <tbody>
         {% for reservation in reservations %}
             <tr>
                 <td>{{ reservation.titre }}</td>
                 <td>{% if reservation.dateDeb %}{{ reservation.dateDeb|date('Y-m-d') }}{% endif %}</td>
                 <td>{% if reservation.dateFin %}{{ reservation.dateFin|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ reservation.location.titre }}</td>
+                <td></td>
+
 
                 {% if is_granted ('ROLE_USER') %}
                     <td>
@@ -33,4 +32,5 @@
         {% endfor %}
         </tbody>
     </table>
+    <br><br>
     {% endblock %}

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\DateTimeTime;
 /**
  * Location
  *
- * @ORM\Table(name="location")
+ * @ORM\Table(name="location", indexes={@ORM\Index(name="fk_user", columns={"id_user"})} )
  * @ORM\Entity
  */
 class Location
@@ -79,9 +79,21 @@ class Location
     private $dateCreation;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=20, nullable=false)
+     */
+    protected $username;
+    /**
      * @ORM\OneToMany(targetEntity="RentBundle\Entity\Reservation",mappedBy="Location")
      */
     protected $Reservation;
+
+    /**
+     *  @ORM\ManyToOne(targetEntity="RentBundle\Entity\FosUser")
+     * @ORM\JoinColumn(name="id_user",referencedColumnName="id")
+     */
+    protected $user;
 
     /**
      * Get id
@@ -190,6 +202,23 @@ class Location
     }
 
     /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+
+    /**
      * Set rating
      *
      * @param int $rating
@@ -236,5 +265,23 @@ class Location
     {
         return $this->dateCreation;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+
 
 }

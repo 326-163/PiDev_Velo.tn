@@ -14,7 +14,7 @@
     </field>
     <field name="dateDeb" type="date" column="dateDeb" nullable="false"/>
     <field name="dateFin" type="date" column="dateFin" nullable="false"/>
-    <field name="location" type="integer" column="id_location" nullable="true">
+    <field name="location" type="string" column="id_location"  length="65535" nullable="true">
       <options>
         <option name="unsigned"/>
       </options>

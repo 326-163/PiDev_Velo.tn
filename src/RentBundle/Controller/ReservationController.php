@@ -69,13 +69,16 @@ class ReservationController extends Controller
             {
                 $one_location_objet = $array_location[0];
                 $reservation->setLocation($one_location_objet);
-                ///reservation->setLocation($form['location']->getData());
-                //$reservation->setDateDeb($form['dateDeb']->getData());
-                //reservation->setDateFin($form['dateFin']->getData());
+                //reservation->setLocation($form['location']->getData());
+           // $reservation->setDateDeb($form['dateDeb']->getData());
+            //$reservation->setDateFin($form['dateFin']->getData());
+
                 $em->persist ($reservation);
                 $em->flush();
-                $this->addFlash('success','reservation ajoutée avec succees  !');
-                return $this->redirect ($this->generateUrl('reservation_calendar' ));
+
+                $this->addFlash('success','reservation ajoutée avec succée  !');
+
+                return $this->redirect ($this->generateUrl('homepage' ));
             } else {
                 return new Response ('erreur d affectation');
             }
@@ -101,6 +104,7 @@ class ReservationController extends Controller
         'reservation' => $reservation,
       ));
     }
+
     /**
      * Displays a form to edit an existing reservation entity.
      *
@@ -146,10 +150,8 @@ class ReservationController extends Controller
     private function createDeleteForm(Reservation $reservation)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('reservation_delete', array('id' => $reservation->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->setAction($this->generateUrl('reservation_delete', array('id' => $reservation->getId())) )
+            ->setMethod('DELETE') ->getForm() ;
     }
 
     public function  notifAction(Request $request, Reservation $reservation)
@@ -163,6 +165,10 @@ class ReservationController extends Controller
 
     public function acceptAction ()
     {
-        return $this->render('RentBundle:reservation:cal.html.twig') ;
+       /* $em=$this->getDoctrine()->getEntityManager();
+        $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
+        $em->remove($reservation);
+        $em->flush();*/
+        return $this->render('RentBundle:reservation:calendrier.html.twig') ;
     }
 }

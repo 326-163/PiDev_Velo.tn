@@ -26,5 +26,6 @@
       </options>
     </field>
     <field name="dateCreation" type="date" column="dateCreation" nullable="false"/>
+    <field name="username" type="string" column="username" nullable="false"/>
   </entity>
 </doctrine-mapping>

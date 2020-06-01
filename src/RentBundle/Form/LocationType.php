@@ -6,6 +6,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
+
 class LocationType extends AbstractType
 {
     /**
@@ -13,8 +18,16 @@ class LocationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('titre')->add('lieu')->add('prix')->add('photo')->add('rating');
-    }/**
+        $builder->add('titre')
+            ->add('username')
+            ->add('lieu')
+            ->add('prix')
+            ->add('photo')
+            ->add('rating');
+    }
+
+
+    /**
  * {@inheritdoc}
  */
     public function configureOptions(OptionsResolver $resolver)

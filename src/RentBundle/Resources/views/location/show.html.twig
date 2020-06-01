@@ -5,12 +5,11 @@
 
 <!-- Page Content -->
     <div class="container">
-  
-          {% block title %} Velo.tn {% endblock %}
+        <br>     <br>
           <div class="text-center" ><h1> Affichage location  </h1> <br/> </div>
             <br>
-           
-              <a href="{{ path('location_show',{'id':location.id}) }}" </a>
+
+              <a href="{{ path('location_show',{'id':location.id}) }}"  </a>
         
             <img class="card-img-top img-fluid" src="{{ asset(location.photo) }}" alt="" style="width:12.5em">
           <div class="card-body">
@@ -18,16 +17,14 @@
               <h4>{{ location.prix }}DT</h4>
               <h4>{{ location.rating }}</h4>
               <h4>{{ location.dateCreation |date('Y-m-d')}}</h4>
-
-              <br><br>
-
             <div>
+                <br><br>
               <TR>
               {% if is_granted ('ROLE_VISITEUR') %}  <!--client--> 
                 <td>    
                   <a href="{{ path('reservation_new') }}" class="btn btn-primary btn-sm">Reserver</a>
                 </td>
-                {% elseif is_granted ('ROLE_ADMIN') %}
+                {% elseif is_granted (' ROLE_USER') %}
                 <td>  <!--locataire-->                    
                   <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a> 
                 </td>

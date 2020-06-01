@@ -9,13 +9,14 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * Reservation
  *
- * @ORM\Table(name="reservation", indexes={@ORM\Index(name="fk_location", columns={"id"}), @ORM\Index(name="fk_user", columns={"id_U"})})
+ * @ORM\Table(name="reservation", indexes={@ORM\Index(name="fk_location", columns={"id"}), @ORM\Index(name="fk_user", columns={"id_user"})})
  * @ORM\Entity
  */
 class Reservation
 {
     /**
      * @var int
+     *
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id

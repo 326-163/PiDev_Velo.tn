@@ -2,6 +2,7 @@
 
 namespace RentBundle\Controller;
 
+use RentBundle\Entity\FosUser;
 use RentBundle\Entity\Location;
 use RentBundle\Form\LocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,35 +26,60 @@ class LocationController extends Controller
      * Home.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        /* //$user =$this->getUser();
+         //if($user){
+         $em = $this->getDoctrine()->getManager();
+         $locations = $em->getRepository('RentBundle:Location')->findAll();
+         //}else{
+         //  $this->redirectToRoute('fos_user_security_login');
+         //}
+         return $this->render('RentBundle:location:affichage.html.twig', array(
+             'locations' => $locations,
+         ));
+         var_dump($locations);
+         die();*/
+
         //$user =$this->getUser();
         //if($user){
-        $em = $this->getDoctrine()->getManager();
-        $locations = $em->getRepository('RentBundle:Location')->findAll();
-        //}else{
-        //  $this->redirectToRoute('fos_user_security_login');
-        //}
-        return $this->render('RentBundle:location:location.html.twig', array(
-            'locations' => $locations,
-        ));
-        var_dump($locations);
-        die();
-    }
+  $em = $this->getDoctrine()->getManager();
+  $locations = $em->getRepository('RentBundle:Location')->findAll();
+  //}else{
+         //  $this->redirectToRoute('fos_user_security_login');
+         //}
+  $paginator = $this->get('knp_paginator');
+  $result = $paginator->paginate(
+      $locations,
+      $request->query->getInt('page', 1),
+      $request->query->getInt('limit', 5)
 
-    /**
-     * Creates a new location entity.
-     *
-     */
+  );
+
+  return $this->render('@Rent/location/affichage.html.twig', array('locations' => $result));
+}
+
+
+/**
+* Creates a new location entity.
+*
+*/
     public function newAction(Request $request)
     {
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $location = new Location();
         $form = $this->createForm('RentBundle\Form\LocationType', $location);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
+          // $username = $location->getUsername();
             $em = $this->getDoctrine()->getManager();
-
+         /*   $array_user = $em->getRepository(FosUser::class) ->findByUsername($username);
+            if ($array_user!= null )
+            {
+                $one_user_objet = $array_user[0];
+                $location->setUsername($one_user_objet);
+*/
             $file=$location->getPhoto();
             $filename= md5(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('photos_directory'),$filename);
@@ -66,6 +92,9 @@ class LocationController extends Controller
             $this->addFlash('success','publication ajoutee !');
 
             return $this->redirectToRoute('location_homepage');
+          /*  } else {
+                return new Response ('Erreur d affectation');
+            }*/
         }
         return $this->render('RentBundle:location:new.html.twig', array(
 //          'location' => $location,
@@ -118,67 +147,67 @@ return $this->render('RentBundle:location:new.html.twig', array (
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
-        $location = $em->getRepository('RentBundle:Location')->find($id);
-        $locations = $em->getRepository('RentBundle:Location')->findAll();
-        return $this->render('RentBundle:location:show.html.twig', array(
-            'location' => $location,
-        ));
+         $em = $this->getDoctrine()->getEntityManager();
+         $location = $em->getRepository('RentBundle:Location')->find($id);
+         $locations = $em->getRepository('RentBundle:Location')->findAll();
+
+         return $this->render('RentBundle:location:show.html.twig', array(
+             'location' => $location,
+         ));
     }
 
-    /**
-     * Displays a form to edit an existing location entity.
-     *
-     */
-    public function editAction(Request $request, $id)
-    {
-        /* $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
-         $form = $this->createForm('RentBundle\Form\LocationType', $location);
-         $form->handleRequest($request);
-         if ($form->isSubmitted()) {
-             $em = $this->getDoctrine()->getManager();
-             $em->persist($location);
-             $em->flush();
-             $this->addFlash('success','your rent has been successfuly updated !');
-             return $this->redirect ($this->generateUrl('location_show'));
-         }*/
+        /**
+         * Displays a form to edit an existing location entity.
+         *
+         */
+        public function editAction(Request $request, $id)
+        {
+            /* $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
+             $form = $this->createForm('RentBundle\Form\LocationType', $location);
+             $form->handleRequest($request);
+             if ($form->isSubmitted()) {
+                 $em = $this->getDoctrine()->getManager();
+                 $em->persist($location);
+                 $em->flush();
+                 $this->addFlash('success','your rent has been successfuly updated !');
+                 return $this->redirect ($this->generateUrl('location_show'));
+             }*/
 
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+            $em = $this->getDoctrine()->getEntityManager();
+            $location = $em->getRepository('RentBundle:Location')->find($id);
 
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
-        $em=$this->getDoctrine()->getEntityManager();
-        $location = $em->getRepository('RentBundle:Location')->find($id);
+            $form = $this->createFormBuilder($location)
+                ->add('titre', TextType::class, array('attr' => array('class' => 'col-md-4 form-control')))
+                ->add('lieu', TextType::class, array('attr' => array('class' => 'col-md-4 form-control')))
+                ->add('prix', IntegerType::class, array('attr' => array('class' => 'col-md-4 form-control')))
+                ->add('photo', TextType::class, array('attr' => array('class' => 'col-md-4 form-control')))
+                //->add('rating',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
+                ->add('dateCreation', DateTimeType::class, array('attr' => array('class' => 'col-md-4 form-control')))
+                ->add('Enregistrer', SubmitType::class, array('attr' => array('class' => 'col-md-4 form-control')))
+                ->getForm();
 
-        $form=$this->createFormBuilder($location)
-            ->add('titre',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-            ->add('lieu',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-            ->add('prix',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-            ->add('photo',TextType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-            //->add('rating',IntegerType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-            ->add('dateCreation',DateTimeType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-            ->add('Enregistrer',SubmitType::class,array('attr'=>array('class'=>'col-md-4 form-control')))
-            ->getForm();
+            $form->handleRequest($request);
 
-        $form->handleRequest($request);
+            if ($form->isSubmitted()) {
+                $location->setTitre($form['titre']->getData());
+                $location->setLieu($form['lieu']->getData());
+                $location->setPrix($form['prix']->getData());
+                $location->setPhoto($form['photo']->getData());
+                //$location->setRating($form['rating']->getData() );
+                $location->setDateCreation($form['dateCreation']->getData());
+                $em->persist($location);
+                $em->flush();
 
-        if ($form->isSubmitted () ) {
-            $location->setTitre($form['titre']->getData());
-            $location->setLieu($form['lieu']->getData());
-            $location->setPrix($form['prix']->getData());
-            $location->setPhoto($form['photo']->getData());
-            //$location->setRating($form['rating']->getData() );
-            $location->setDateCreation($form['dateCreation']->getData());
-            $em->persist ($location);
-            $em->flush();
+                $this->addFlash('success', 'your rent has been successfuly persisted !');
 
-            $this->addFlash('success','your rent has been successfuly persisted !');
+                return $this->redirect($this->generateUrl('location_confirmation'));
+            }
 
-            return $this->redirect ($this->generateUrl('location_confirmation'));
+            return $this->render('RentBundle:location:edit.html.twig', array(
+                'form' => $form->createView()
+            ));
         }
-
-        return $this->render('RentBundle:location:edit.html.twig', array (
-            'form'=>$form->createView()
-        )) ;
-    }
 
 
     /**
@@ -267,28 +296,28 @@ return $this->render('RentBundle:location:new.html.twig', array (
     {
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['dateCreation' => 'DESC']);
-        return $this->render( 'RentBundle:location:location.html.twig', array('locations'=> $rep));
+        return $this->render( 'RentBundle:location:affichage.html.twig', array('locations'=> $rep));
     }
 
     public function lowdateAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['dateCreation' => 'ASC']);
-        return $this->render( 'RentBundle:location:location.html.twig', array('locations'=> $rep));
+        return $this->render( 'RentBundle:location:affichage.html.twig', array('locations'=> $rep));
     }
 
     public function highprixAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['prix' => 'DESC']);
-        return $this->render( 'RentBundle:location:location.html.twig', array('locations'=> $rep));
+        return $this->render( 'RentBundle:location:affichage.html.twig', array('locations'=> $rep));
     }
 
     public function lowprixAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('RentBundle:Location')->findBy([], ['prix' => 'ASC']);
-        return $this->render('RentBundle:location:location.html.twig', array(
+        return $this->render('RentBundle:location:affichage.html.twig', array(
             'locations' => $rep,
         ));
         var_dump($locations);

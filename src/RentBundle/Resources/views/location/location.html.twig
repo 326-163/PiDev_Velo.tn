@@ -13,7 +13,7 @@
 
     <div class="dropdown">
         <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-          Tri selon
+          Filtrer par
         </button>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ path('tri_prix_asc') }}"> prix bas</a>
@@ -35,6 +35,9 @@
                 <th>Rating</th>
                 <th>Publié le</th>
                 <th>Lieu</th>
+                <th>Locataire</th>
+                <th>Email locataire</th>
+
             </tr>
         </thead>
 
@@ -47,6 +50,8 @@
                 <td>{{ location.rating }}</td>
                 <td>{{ location.dateCreation |date('Y-m-d') }}</td>
                 <td>{{ location.lieu }}</td>
+                <td></td>
+                <td></td>
 
                 <TD>
          <a href="{{ path('location_show', { 'id': location.id }) }}" class="btn btn-primary btn-sm">Afficher</a>
