@@ -60,6 +60,7 @@ class Location
      * @Assert\File(maxSize="500k", mimeTypes={"image/jpeg", "image/jpg", "image/png", "image/GIF"})
      * @Assert\NotBlank
      */
+
     private $photo;
 
     /**

@@ -9,7 +9,11 @@
   </br>  
 
    <div class="container">
-{{ form(form) }}
+       {{ form_start(form) }}
+
+       {{ form_widget(form) }}
+
+       {{ form_end(form) }}
  
 </div>
   {% endif %}

@@ -5,8 +5,6 @@ namespace RentBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
@@ -22,8 +20,7 @@ class LocationType extends AbstractType
             ->add('username')
             ->add('lieu')
             ->add('prix')
-            ->add('photo')
-            ->add('rating');
+            ->add('photo');
     }
 
 

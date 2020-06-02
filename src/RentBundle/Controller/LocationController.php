@@ -172,12 +172,11 @@ return $this->render('RentBundle:location:new.html.twig', array (
                  $this->addFlash('success','your rent has been successfuly updated !');
                  return $this->redirect ($this->generateUrl('location_show'));
              }*/
-
             $user = $this->container->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getEntityManager();
             $location = $em->getRepository('RentBundle:Location')->find($id);
 
-            $form = $this->createFormBuilder($location)
+           $form = $this->createFormBuilder($location)
                 ->add('titre', TextType::class, array('attr' => array('class' => 'col-md-4 form-control')))
                 ->add('lieu', TextType::class, array('attr' => array('class' => 'col-md-4 form-control')))
                 ->add('prix', IntegerType::class, array('attr' => array('class' => 'col-md-4 form-control')))

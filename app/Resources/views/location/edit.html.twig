@@ -1,17 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   {% block title %}<div class="text-center" ><h1> mise a jour location : Locataire </h1> <br/>{% endblock %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    {% if is_granted ('ROLE_USER') %}
 
-    <ul>
-        <li>
-            <a href="{{ path('location_show') }}">Retour</a>
-        </li>
-       
-    </ul>
-{% endblock %}
+<div class="container">
+    <div class="text-center" ><h1> mise a jour location  2</h1> <br/> </div>
+    </br>
+
+    <div class="container">
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+        {{ form_end(form) }}
+
+    </div>
+    {% endif %}
+    {% endblock %}
+

@@ -9,13 +9,12 @@
           <div class="text-center" ><h1> Affichage location  </h1> <br/> </div>
             <br>
 
-              <a href="{{ path('location_show',{'id':location.id}) }}"  </a>
+              <a href="{{ path('location_show',{'id':location.id}) }}"</a>
         
             <img class="card-img-top img-fluid" src="{{ asset(location.photo) }}" alt="" style="width:12.5em">
           <div class="card-body">
               <h3 class="card-title">{{ location.titre }}</h3>
               <h4>{{ location.prix }}DT</h4>
-              <h4>{{ location.rating }}</h4>
               <h4>{{ location.dateCreation |date('Y-m-d')}}</h4>
             <div>
                 <br><br>

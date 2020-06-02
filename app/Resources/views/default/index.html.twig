@@ -119,7 +119,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                         <a class="dropdown-item" href="{{ path('location_new') }}"> Louer</a>
                                         <a class="dropdown-item" href="{{ path('location_homepage') }}">Reserver</a>
-                                        {% if is_granted ('ROLE_USER') %}
+                                        {% if is_granted ('ROLE_LOCATAIRE') %}
                                             <a class="dropdown-item" href="{{ path('reservation_homepage') }}">Reservations</a>
                                         {% endif %}
                                     </div>

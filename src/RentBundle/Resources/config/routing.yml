@@ -97,3 +97,4 @@ fullcalendar_loader:
     defaults: { _controller: ADesignsCalendarBundle:Calendar:loadCalendar }
     options:
         expose: true
+
