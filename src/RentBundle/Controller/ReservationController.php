@@ -62,16 +62,16 @@ class ReservationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid() )
         {
-            $titre = $reservation->getTitre();
+          //  $titre = $reservation->getTitre();
             $em=$this->getDoctrine()->getEntityManager();
-            $array_location = $em->getRepository(Location::class) ->findByTitre($titre);
-            if ($array_location!= null )
-            {
-                $one_location_objet = $array_location[0];
-                $reservation->setLocation($one_location_objet);
+           // $array_location = $em->getRepository(Location::class) ->findByTitre($titre);
+          //  if ($array_location!= null )
+         //   {
+               // $one_location_objet = $array_location[0];
+              //  $reservation->setLocation($one_location_objet);
                 //reservation->setLocation($form['location']->getData());
-           // $reservation->setDateDeb($form['dateDeb']->getData());
-            //$reservation->setDateFin($form['dateFin']->getData());
+            $reservation->setDateDeb($form['dateDeb']->getData());
+            $reservation->setDateFin($form['dateFin']->getData());
 
                 $em->persist ($reservation);
                 $em->flush();
@@ -79,9 +79,9 @@ class ReservationController extends Controller
                 $this->addFlash('success','reservation ajoutée avec succée  !');
 
                 return $this->redirect ($this->generateUrl('homepage' ));
-            } else {
-                return new Response ('erreur d affectation');
-            }
+        //    } else {
+         //       return new Response ('erreur d affectation');
+        //    }
         }
 
         return $this->render('RentBundle:reservation:new.html.twig', array (
@@ -95,7 +95,7 @@ class ReservationController extends Controller
      * Finds and displays a reservation entity.
      *
      */
-    public function showAction( $id)
+    public function showAction($id)
     {
       $em = $this->getDoctrine()->getEntityManager();
       $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
@@ -177,6 +177,7 @@ class ReservationController extends Controller
         $reservation = $em->getRepository('RentBundle:Reservation')->find($id);
         $em->remove($reservation);
         $em->flush();*/
-        return $this->render('RentBundle:reservation:calendrier.html.twig') ;
+
+        return $this->redirectToRoute('homepage');
     }
 }

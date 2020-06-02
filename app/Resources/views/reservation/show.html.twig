@@ -13,7 +13,7 @@
 
           <div class="list-group">
           {% for location in locations %}
-              <a href="{{ path('location_show',{'id':location.id}) }}" class="list-group-item {% if location== product.getLocation() %}active{% endif %}">{{ location.titre }}</a>
+              <a href="{{ path('location_show',{'id':location.id}) }}" class="list-group-item {% if location== location.getLocation() %}active{% endif %}">{{ location.titre }}</a>
           {% endfor %}
           </div>
         </div>
