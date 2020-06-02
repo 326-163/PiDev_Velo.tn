@@ -19,10 +19,16 @@
                 <h4>{{ location.dateCreation }}</h4>
               <br><br>
                   <div>
-                  <!--client--> 
-                     <a href="{{ path('reservation_new') }}" class="btn btn-primary">Reserver</a>
-                      {% if is_granted ('ROLE_USER') %)
-                      <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a>
+                      {% if is_granted ('ROLE_CLIENT') %}  <!--client-->
+                          <td>
+                              <a href="{{ path('reservation_new') }}" class="btn btn-primary btn-sm">Reserver</a>
+                          </td>
+                      {% elseif is_granted (' ROLE_LOCATAIRE') %}
+                          <td>  <!--locataire-->
+                              <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a>
+                          </td>
+                      {% elseif is_granted (' ROLE_SUPER_ADMIN') %}
+                          <a href="{{ path('location_delete', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Supprimer </a>
                       {% endif %}
                     </div>
           </div>

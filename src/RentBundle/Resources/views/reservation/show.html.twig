@@ -3,11 +3,11 @@
 {% block body %}
 
 <!-- Page Content -->
-  
+    <br>   <br>
     
           <div class="text-center" ><h1> Affichage reservation </h1> <br/> </div>
 
-          <br>   <br>
+    <br>   <br>
 
     <table class="table_striped">
 
@@ -27,9 +27,9 @@
         </tbody>
     </table>
     <br>   <br>
-    {% if is_granted ('ROLE_USER') %}
+    {% if is_granted ('ROLE_CLIENT') %}
         <td>                  
-            <a href="{{ path('reservation_edit', { 'id': reservation.id }) }}" class="btn btn-primary "> Modifier </a>
+
             <a href="{{ path('reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger "> Supprimer </a>                    
         </td>
  {% endif %}

@@ -6,7 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-  {% block title %} Velo.tn {% endblock %}
+
 <div class="text-center" ><h1> Liste des locations disponible </h1> </div>
     <br/><br>
 
@@ -55,7 +55,7 @@
 
                 <TD>
          <a href="{{ path('location_show', { 'id': location.id }) }}" class="btn btn-primary btn-sm">Afficher</a>
-         {% if is_granted ('ROLE_ADMIN') %}
+         {% if is_granted ('ROLE_LOCATAIRE') %}
          <a href="{{ path('location_delete', { 'id': location.id }) }}" class="btn btn-danger btn-sm"> Supprimer </a>
                {% endif %}
                 </TD>

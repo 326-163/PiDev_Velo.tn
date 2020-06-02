@@ -25,7 +25,7 @@
             <td></td>
 
  
-            {% if is_granted ('ROLE_USER') %}
+            {% if is_granted ('ROLE_LOCATAIRE') %}
             <td>
             <a href="{{ path('reservation_accept', { 'id': reservation.id }) }}" class="btn btn-success btn-sm"> Accepter </a>
             <a href="{{ path('reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger btn-sm"> Refuser </a>
@@ -35,5 +35,7 @@
         {% endfor %}
         </tbody>
     </table>
+
     <br><br><br>
+
     {% endblock %}

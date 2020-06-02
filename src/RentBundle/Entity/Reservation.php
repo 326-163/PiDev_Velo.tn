@@ -29,7 +29,7 @@ class Reservation
      *
      * @ORM\Column(name="titre", type="string", length=20, nullable=false)
      */
-    private $titre;
+    protected $titre;
 
     /**
      * @var \DateTime

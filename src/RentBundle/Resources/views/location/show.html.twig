@@ -20,15 +20,18 @@
             <div>
                 <br><br>
               <TR>
-              {% if is_granted ('ROLE_VISITEUR') %}  <!--client--> 
+              {% if is_granted ('ROLE_CLIENT') %}  <!--client-->
                 <td>    
                   <a href="{{ path('reservation_new') }}" class="btn btn-primary btn-sm">Reserver</a>
                 </td>
-                {% elseif is_granted (' ROLE_USER') %}
-                <td>  <!--locataire-->                    
-                  <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a> 
+                {% elseif is_granted ('ROLE_LOCATAIRE') %}
+                <td>
+                  <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-outline-warning btn-sm"> Modifier </a>
                 </td>
-                {% endif %}
+                 <td> <a href="{{ path('location_delete', { 'id': location.id }) }} " class="btn btn-outline-danger btn-sm"> Supprimer </a></td>
+                {% elseif is_granted (' ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('location_delete', { 'id': location.id }) }} " class="btn btn-outline-danger btn-sm"> Supprimer </a>
+              {% endif %}
               </TR>
             </div>
           </div>

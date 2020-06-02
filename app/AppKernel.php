@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
             new Mobile\MobileAPIBundle\MobileAPIBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new SBC\NotificationsBundle\NotificationsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

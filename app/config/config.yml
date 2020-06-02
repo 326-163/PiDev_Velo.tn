@@ -83,3 +83,5 @@ fos_user:
     from_email:
         address: "your email"
         sender_name: "your name"
+
+

@@ -138,7 +138,23 @@
                         </ul>
                     </div>
 
-                    <a class="far fa-user" id="login" href="{{ path ('fos_user_security_login') }}"> </a>
+                    <li class="nav-item dropdown">
+                        <a class="far fa-user"  id="navbarDropdown_1"
+                           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <a class="dropdown-item" href="/profile"> Profile</a>
+
+                                <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Deconexion</a>
+
+                            {% else %}
+                                <a class="dropdown-item" id="login" id="login" href="{{ path ('fos_user_security_login') }}"> log in</a>
+                            {% endif %}
+
+                        </div>
+                    </li>
+
 
 
                     <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
@@ -231,68 +247,62 @@
                         eventLimit: true, // allow "more" link when too many events
                         events: [
                             {
-                                title: 'please',
-                                url:  "/rent/location",
-                                start: '2020-09-08',
-                                end: '2020-09-10'
-                            },
-                            {
                                 title: 'Green byke',
-                                url: "/rent/location",
+                                url: "/rent/showReserv15",
                                 start: '2020-03-27',
                                 end: '2020-03-28'
                             },
                             {
                                 title: 'A louer',
-                                url: "/rent/location",
+                                url: "/rent/showReserv17",
                                 start: '2020-02-28',
                                 end: '2020-03-08'
                             },
                             {
                                 title: 'Velo montagne',
-                                url: "/rent/location",
+                                url: "/rent/showReserv18",
                                 start: '2020-02-07',
                                 end: '2020-03-08'
                             },
                             {
                                 title: 'byke for rent',
-                                url: "/rent/location",
+                                url: "/rent/showReserv19",
                                 start: '2020-02-12T10:30:00',
                                 end: '2020-02-12T12:30:00'
                             },
                             {
                                 title: 'a louer',
-                                url: "/rent/location",
+                                url: "/rent/showReserv20",
                                 start: '2020-02-18',
                                 end: '2020-02-20'
                             },
                             {
                                 title: 'rent',
-                                url: 'http://google.com/',
+                                url: '/rent/showReserv21',
                                 start: '2020-02-18',
                                 end: '2020-02-20'
                             },
                             {
                                 title: 'byk montagne',
-                                url: 'http://google.com/',
+                                url: '/rent/showReserv22',
                                 start: '2020-05-01',
                                 end: '2020-05-11'
                             },
                             {
                                 title: 'vélo pour montagne',
-                                url: 'http://google.com/',
+                                url: '/rent/showReserv23',
                                 start: '2020-05-01',
                                 end: '2020-05-11'
                             },
                             {
                                 title: 'a ne pas rater',
-                                url: 'http://google.com/',
+                                url: '/rent/showReserv29',
                                 start: '2020-10-18',
                                 end: '2020-10-21'
                             },
                             {
                                 title: 'vélo pour enfants',
-                                url: 'http://google.com/',
+                                url: '/rent/showReserv38',
                                 start: '2020-08-15',
                                 end: '2020-08-17'
                             }

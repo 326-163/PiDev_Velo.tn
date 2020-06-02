@@ -1,10 +1,7 @@
 {% extends 'base.html.twig' %}
 
-  {% block title %} Velo.tn {% endblock %}
-
-
 {% block body %}
-    {% if is_granted ('ROLE_USER') %}
+    {% if is_granted ('ROLE_ROLE_LOCATAIRE') %}
 
         {{ form_start(form) }}
 	<br><br> <div class="text-center"><h1> Formulaire ajout location </h1></div><br><br>

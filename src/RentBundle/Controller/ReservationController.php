@@ -156,12 +156,20 @@ class ReservationController extends Controller
 
     public function  notifAction(Request $request, Reservation $reservation)
     {
-
+        return $this->render('RentBundle:reservation:notification.html.twig');
     }
+
+
     public function reserverAction()
     {
+       /* $data = array(
+            'my-message' => "My custom message",
+        );
+        $pusher = $this->get('mrad.pusher.notificaitons');
+        $pusher->trigger($data);*/
       return $this->render('RentBundle:reservation:calendrier.html.twig');
     }
+
 
     public function acceptAction ()
     {
