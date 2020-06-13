@@ -32,13 +32,27 @@ public function findAction($id)
     $formatted = $serializer->normalize($reservations);
     return new JsonResponse($formatted);
 }
+
+
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager()  ;
         $reservation = new Reservation();
         $reservation->setDateDeb($request->get('dateDeb'));
         $reservation->setDateFin($request->get('dateFin'));
+
         $em->persist($reservation);
+        $em->flush();
+        $serializer = new serializer ([new objectNormalizer()]);
+        $formatted = $serializer->normalize($reservation);
+        return new JsonResponse($formatted);
+    }
+
+
+    public function updateAction (Request $request, $id){
+        $em = $this->getDoctrine()->getManager()  ;
+
+      $em->persist($reservation);
         $em->flush();
         $serializer = new serializer ([new objectNormalizer()]);
         $formatted = $serializer->normalize($reservation);

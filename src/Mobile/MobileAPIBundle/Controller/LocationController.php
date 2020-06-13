@@ -17,51 +17,25 @@ class LocationController extends Controller
 {
 
     public function allAction ()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $reservations =$em->getRepository('MobileAPIBundle:Location')->findAll();
-
-       $normalizer = new ObjectNormalizer();
-         $normalizer->setCircularReferenceLimit(2);
-        $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object->getId();
-        });
-        $normalizers = array($normalizer);
-        $serializer = new Serializer($normalizers);
-        $reservationss=array();
-        foreach ($reservations as $reservation) {
-
-            $r=array("id"=>$reservation->getId(),
-                    "titre"=>$reservation->getTitre(),
-                    "lieu"=>$reservation->getLieu(),
-                    "photo"=>$reservation->getPhoto(),
-                    "rating"=>$reservation->getRating(),
-                    "dateCreation"=>$reservation->getDateCreation()
-
-                );
-                   
-                   
-            array_push($reservationss,$r);
-
-        }
-        $formatted=$serializer->normalize($reservationss);
+    {      
+        $locations = $this->getDoctrine()->getManager()
+            ->getRepository('MobileAPIBundle:Location')
+            ->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($locations);
         return new JsonResponse($formatted);
-
-
-        }
-       
-
-    
+    }
 
     public function findAction($id)
     {
         $locations = $this->getDoctrine()->getManager()
             ->getRepository('MobileAPIBundle:Location')
             ->find($id);
-        $serializer = new Serializer ([new ObjectNormalizer()]);
+        $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($locations);
         return new JsonResponse($formatted);
     }
+
 
     public function newAction(Request $request)
     {
@@ -71,8 +45,11 @@ class LocationController extends Controller
         $location->setLieu($request->get('lieu'));
         $location->setPrix($request->get('prix'));
         $location->setPhoto($request->get('photo'));
-       // $location->setRating($request->get('rating'));
+        //$location->setRating($request->get('rating'));
         $location->setDateCreation($request->get('dateCreation'));
+        // $location->setDateCreation(new \DateTime('now'));
+        $location->setUsername($request->get('username'));
+       // $location->setUser($request->get('id_user'));
        
         $em->persist($location);
         $em->flush();
@@ -82,15 +59,26 @@ class LocationController extends Controller
     }
 
 
-    public function updateAction (Request $request, $id){
+    public function updateAction (Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager()  ;
+        $location = $em->getRepository('MobileAPIBundle:Location')->find($id);
 
-      $em->persist($location);
+        $location->setTitre($request->get('titre'));
+        $location->setLieu($request->get('lieu'));
+        $location->setPrix($request->get('prix'));
+        $location->setPhoto($request->get('photo'));
+        // $location->setRating($request->get('rating'));
+        $location->setDateCreation($request->get('dateCreation'));
+        // $location->setDateCreation(new \DateTime('now'));
+
+        $em->persist($location);
         $em->flush();
         $serializer = new serializer ([new objectNormalizer()]);
         $formatted = $serializer->normalize($location);
         return new JsonResponse($formatted);
     }
+
 
     public function deleteAction(Request $request)
     {
@@ -106,4 +94,17 @@ class LocationController extends Controller
         return new JsonResponse($formatted);
     }
 
+
+    public function showAction($id,Request $request)
+    {
+        $em= $this->getDoctrine()->getManager();
+
+        $location=$em->getRepository('MobileAPIBundle:Location')->findby(['location'=>$id]);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $data = $serializer->normalize($location,null, ['attributes' => ['id','location'=>['id','titre','lieu','prix','photo','dateCreation']
+            ,'user'=> ['id','username','username_canonical','email','email_canonical','enabled','salt','password','last_login','confirmation_token','password_requested_at','roles','first_name','telephone','age','idtrans']
+            ,'content']]);
+        $formatted = $serializer->normalize($data);
+        return new JsonResponse($formatted);
+    }
 }

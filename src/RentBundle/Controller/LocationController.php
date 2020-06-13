@@ -162,16 +162,6 @@ return $this->render('RentBundle:location:new.html.twig', array (
          */
         public function editAction(Request $request, $id)
         {
-            /* $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
-             $form = $this->createForm('RentBundle\Form\LocationType', $location);
-             $form->handleRequest($request);
-             if ($form->isSubmitted()) {
-                 $em = $this->getDoctrine()->getManager();
-                 $em->persist($location);
-                 $em->flush();
-                 $this->addFlash('success','your rent has been successfuly updated !');
-                 return $this->redirect ($this->generateUrl('location_show'));
-             }*/
             $user = $this->container->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getEntityManager();
             $location = $em->getRepository('RentBundle:Location')->find($id);
@@ -263,34 +253,15 @@ return $this->render('RentBundle:location:new.html.twig', array (
      }
 
 
-     /*public function getelementAction($id){
-         $club = $this->getDoctrine()->getRepository(Club::class);
-         $re =$club->findonebyname($id);
-         //dump($re);
-         return $this->render('@Club/Club/search.html.twig',
-             ['club'=>$re]);
-     }
-
-     public function SendEmailAction(){
-         $message = \Swift_Message::newInstance()
-         ->setSubject('Formalab')
-         ->setFrom('nahawand.laajili@gmail.com')
-         ->setTo('nahawand.laajili@gmail.com')
-         ->setBody('test from nahawand');
-         $this->get('mailer')
-             ->send($message);
-         return $this->render('send.html.twig');
-      }
-
-
       public function countaction ()
       {
         // yay! Use this to see if the user is logged in
   if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
     throw $this->createAccessDeniedException();
   }
+
   }
-     */
+
     public function highdateAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();

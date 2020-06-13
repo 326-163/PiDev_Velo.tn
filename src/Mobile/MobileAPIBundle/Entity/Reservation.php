@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Reservation
  *
- * @ORM\Table(name="reservation", indexes={@ORM\Index(name="fk_user", columns={"id_U"}), @ORM\Index(name="IDX_42C8495588D9EA89", columns={"Id_location"}), @ORM\Index(name="fk_location", columns={"id"})})
+ * @ORM\Table(name="reservation", indexes={@ORM\Index(name="fk_location", columns={"id"})  })
  * @ORM\Entity
  */
 class Reservation
@@ -15,25 +15,48 @@ class Reservation
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=20, nullable=true)
+     */
+    protected $titre;
+
+
+
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateDeb", type="date", nullable=false)
+     * @Assert\Date
+     * @Assert\GreaterThanOrEqual("today")
      */
     private $dateDeb;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateFin", type="date", nullable=false)
+     * @ORM\Column(name="dateFin", type="date")
+     * @Assert\Date
+     * @Assert\GreaterThanOrEqual(
+     *  propertyPath="dateDeb", message="La date du fin doit
+     *  être supérieure à la date début")
      */
     private $dateFin;
+
+
+    /**
+     *  @ORM\ManyToOne(targetEntity="Mobile\MobileAPIBundle\Entity\Location")
+     * @ORM\JoinColumn(name="id_location",referencedColumnName="id")
+     */
+    protected $location;
 
 
 
@@ -99,6 +122,38 @@ class Reservation
 
 
 
+
+    /**
+     * @return mixed
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param mixed $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
 
 
 

@@ -2,13 +2,15 @@
 
 namespace Mobile\MobileAPIBundle\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTimeTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Location
  *
- * @ORM\Table(name="location")
+ * @ORM\Table(name="location", indexes={@ORM\Index(name="fk_user", columns={"id_user"})} )
  * @ORM\Entity
  */
 class Location
@@ -16,55 +18,79 @@ class Location
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
+
     /**
      * @var string
-     *
-     * @ORM\Column(name="titre", type="string", length=20, nullable=false)
+     * @Assert\Length(
+     *     min=5,
+     *     max=50,
+     *     minMessage="Le titre doit contenir au moins 5 carcatères ",
+     *     maxMessage="Le titre doit contenir au plus 20 carcatères"
+     * )
+     * @ORM\Column(name="titre", type="string", length=20, nullable=true)
      */
     private $titre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lieu", type="string", length=20, nullable=false)
+     * @ORM\Column(name="lieu", type="string", length=20, nullable=true)
      */
     private $lieu;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="Prix", type="float")
+     * @Assert\GreaterThan(value=0,
+     * message="la prix doit etre superieur à 0"
+     * )
      */
     private $prix;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="string", length=5000, nullable=false)
+     * @ORM\Column(name="photo", type="string", length=500000, nullable=true)
+     * @Assert\File(maxSize="500k", mimeTypes={"image/jpeg", "image/jpg", "image/png", "image/GIF"})
+     * @Assert\NotBlank
      */
     private $photo;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="rating", type="integer", nullable=false)
+     * @ORM\Column(name="rating", type="integer", nullable=true)
      */
     private $rating;
+
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCreation", type="date", nullable=false)
+     * @ORM\Column(name="dateCreation", type="date", nullable=true)
+     * @Assert\Date
+     * @Assert\GreaterThanOrEqual("today")
      */
     private $dateCreation;
 
-      /**
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=20, nullable=true)
+     * @Assert\NotBlank
+     */
+    private $username;
+
+
+
+
+    /**
      * Get id
      *
      * @return int
@@ -73,6 +99,15 @@ class Location
     {
         return $this->id;
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
     /**
      * Set titre
@@ -217,6 +252,23 @@ class Location
     {
         return $this->dateCreation;
     }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
 
 
 }

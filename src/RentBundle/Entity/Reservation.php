@@ -31,13 +31,7 @@ class Reservation
      */
     protected $titre;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateDeb", type="date", nullable=false)
-     * @Assert\Date
-     * @Assert\GreaterThanOrEqual("today")
-     */
+
     protected $dateDeb;
 
     /**
