@@ -35,19 +35,14 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="dateDeb", type="date", nullable=false)
-     * @Assert\Date
-     * @Assert\GreaterThanOrEqual("today")
      */
     private $dateDeb;
+
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateFin", type="date")
-     * @Assert\Date
-     * @Assert\GreaterThanOrEqual(
-     *  propertyPath="dateDeb", message="La date du fin doit
-     *  être supérieure à la date début")
+     * @ORM\Column(name="dateFin", type="date", nullable=false)
      */
     private $dateFin;
 
@@ -69,6 +64,22 @@ class Reservation
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * @param string $titre
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
     }
 
 
@@ -138,23 +149,6 @@ class Reservation
     {
         $this->location = $location;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
 
 
 }

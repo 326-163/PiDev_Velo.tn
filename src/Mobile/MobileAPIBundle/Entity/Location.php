@@ -69,15 +69,13 @@ class Location
      */
     private $rating;
 
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateCreation", type="date", nullable=true)
-     * @Assert\Date
-     * @Assert\GreaterThanOrEqual("today")
      */
-    private $dateCreation;
+    private $datecreation;
+
 
     /**
      * @var string
@@ -86,8 +84,6 @@ class Location
      * @Assert\NotBlank
      */
     private $username;
-
-
 
 
     /**
@@ -244,14 +240,14 @@ class Location
     }
 
     /**
-     * Get dateCreation
-     *
      * @return \DateTime
      */
-    public function getDateCreation()
+    public function getDatecreation()
     {
-        return $this->dateCreation;
+        return $this->datecreation;
     }
+
+
 
     /**
      * @return string

@@ -38,8 +38,9 @@ public function findAction($id)
     {
         $em = $this->getDoctrine()->getManager()  ;
         $reservation = new Reservation();
-        $reservation->setDateDeb($request->get('dateDeb'));
-        $reservation->setDateFin($request->get('dateFin'));
+        $reservation->setTitre($request->get('titre'));
+        $reservation->setDateDeb(new \DateTime('now'));
+        $reservation->setDateFin(new \DateTime('now'));
 
         $em->persist($reservation);
         $em->flush();
@@ -51,7 +52,11 @@ public function findAction($id)
 
     public function updateAction (Request $request, $id){
         $em = $this->getDoctrine()->getManager()  ;
+        $reservation = $em->getRepository('MobileAPIBundle:Reservation')->find($id);
 
+        $reservation->setTitre($request->get('titre'));
+        $reservation->setDateDeb($request->get('dateDeb'));
+        $reservation->setDateFin($request->get('dateFin'));
       $em->persist($reservation);
         $em->flush();
         $serializer = new serializer ([new objectNormalizer()]);

@@ -69,8 +69,8 @@ class LocationController extends Controller
         $location->setPrix($request->get('prix'));
         $location->setPhoto($request->get('photo'));
         // $location->setRating($request->get('rating'));
-        $location->setDateCreation($request->get('dateCreation'));
-        // $location->setDateCreation(new \DateTime('now'));
+       // $location->setDateCreation($request->get('dateCreation'));
+         $location->setDateCreation(new \DateTime('now'));
 
         $em->persist($location);
         $em->flush();

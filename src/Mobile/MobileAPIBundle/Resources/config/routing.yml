@@ -38,7 +38,7 @@ reservations_all:
 
 
 reservations_create:
-    path:     /reservation/new
+    path:     /reservation/new/{titre}/{dateDeb}/{dateFin}
     defaults: { _controller: MobileAPIBundle:Reservation:new}
 
 reservation_show:
